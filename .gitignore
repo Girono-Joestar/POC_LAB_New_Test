@@ -1,0 +1,28 @@
+# Vercel build output
+.vercel/
+
+# Python virtual environments
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment secrets — NEVER commit these
+.env
+.env.local
+.env.testing
+.env.production
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+
+# Node (if any tooling is added)
+node_modules/

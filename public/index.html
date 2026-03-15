@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POC AI Lab — Interactive Experiments</title>
+    <meta name="description" content="Explore metrology and instrumentation lab experiments with AI-powered guidance.">
+
+    <!-- Material Symbols (Outlined) -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!-- Google Fonts — matching M3 Expressive typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ======================== TOP APP BAR ======================== -->
+    <header class="top-app-bar">
+        <div class="top-app-bar__inner">
+            <span class="material-symbols-outlined top-app-bar__icon">science</span>
+            <h1 class="top-app-bar__title">POC AI Lab</h1>
+        </div>
+    </header>
+
+    <!-- ======================== HERO ======================== -->
+    <section class="hero" id="hero">
+        <div class="hero__text">
+            <h2 class="display-large">Explore.<br>Experiment.<br>Understand.</h2>
+            <p class="body-large">AI-powered interactive metrology lab — tap any experiment to dive in.</p>
+        </div>
+        <div class="hero__shape"></div>
+    </section>
+
+    <!-- ======================== EXPERIMENT LIST ======================== -->
+    <main class="surface-container" id="main-content">
+        <section id="experiment-list" class="experiment-grid">
+            <div class="loader" id="loader">
+                <div class="loader__spinner"></div>
+                <p class="body-medium">Loading experiments…</p>
+            </div>
+        </section>
+
+        <!-- ======================== EXPERIMENT DETAIL ======================== -->
+        <section id="experiment-details" class="hidden">
+            <!-- Back FAB -->
+            <button id="back-btn" class="fab fab--secondary" aria-label="Back to list">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+
+            <div class="detail-layout">
+                <!-- LEFT — Media -->
+                <article class="detail-card media-card">
+                    <h2 id="exp-title" class="headline-large"></h2>
+
+                    <!-- Carousel -->
+                    <div class="carousel" id="carousel">
+                        <div class="carousel__track" id="carousel-track"></div>
+                        <button class="carousel__btn carousel__btn--prev" id="carousel-prev"
+                            aria-label="Previous image">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </button>
+                        <button class="carousel__btn carousel__btn--next" id="carousel-next" aria-label="Next image">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                        <div class="carousel__dots" id="carousel-dots"></div>
+                    </div>
+
+                    <!-- Audio -->
+                    <div class="audio-section">
+                        <span class="material-symbols-outlined">graphic_eq</span>
+                        <audio id="exp-audio" controls></audio>
+                    </div>
+
+                    <!-- Narration -->
+                    <p id="narration-text" class="body-medium narration-text"></p>
+                </article>
+
+                <!-- RIGHT — AI Chat -->
+                <aside class="detail-card chat-card">
+                    <div class="chat-header">
+                        <span class="material-symbols-outlined">smart_toy</span>
+                        <h3 class="title-large">Lab Assistant</h3>
+                    </div>
+                    <div id="chat-messages" class="chat-messages">
+                        <div class="message ai">
+                            <p>👋 Hi! I'm your AI lab assistant. Ask me anything about this experiment.</p>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" class="chat-input" placeholder="Ask a question…"
+                            autocomplete="off">
+                        <button id="send-btn" class="fab fab--primary fab--small" aria-label="Send message">
+                            <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <!-- ======================== FOOTER ======================== -->
+    <footer class="footer">
+        <p class="body-small">&copy; 2026 POC AI Lab &mdash; Metrology & Instrumentation Department</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

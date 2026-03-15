@@ -1,0 +1,674 @@
+/* ==========================================================================
+   POC AI Lab — Material 3 Expressive Design System
+   ==========================================================================
+   Color tokens follow M3 dark-scheme conventions.
+   Shape tokens use the Expressive "extra-large" rounding.
+   Motion uses M3 emphasized easing.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   0. Design Tokens
+   --------------------------------------------------------------------------- */
+:root {
+    /* ---- M3 Dark Scheme (Violet / Purple seed) ---- */
+    --md-sys-color-primary: #cfbcff;
+    --md-sys-color-on-primary: #381e72;
+    --md-sys-color-primary-container: #4f378b;
+    --md-sys-color-on-primary-container: #e9ddff;
+
+    --md-sys-color-secondary: #ccc2dc;
+    --md-sys-color-on-secondary: #332d41;
+    --md-sys-color-secondary-container: #4a4458;
+
+    --md-sys-color-tertiary: #efb8c8;
+    --md-sys-color-on-tertiary: #492532;
+    --md-sys-color-tertiary-container: #633b48;
+
+    --md-sys-color-surface: #141218;
+    --md-sys-color-surface-dim: #141218;
+    --md-sys-color-surface-bright: #3b383e;
+    --md-sys-color-surface-container-lowest: #0f0d13;
+    --md-sys-color-surface-container-low: #1d1b20;
+    --md-sys-color-surface-container: #211f26;
+    --md-sys-color-surface-container-high: #2b2930;
+    --md-sys-color-surface-container-highest: #36343b;
+
+    --md-sys-color-on-surface: #e6e0e9;
+    --md-sys-color-on-surface-variant: #cac4d0;
+    --md-sys-color-outline: #938f99;
+    --md-sys-color-outline-variant: #49454f;
+
+    --md-sys-color-error: #f2b8b5;
+    --md-sys-color-on-error: #601410;
+    --md-sys-color-inverse-surface: #e6e0e9;
+    --md-sys-color-inverse-on-surface: #322f35;
+
+    /* ---- Elevation overlays (M3 tonal) ---- */
+    --md-sys-elevation-1: 0 1px 3px 1px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .3);
+    --md-sys-elevation-2: 0 2px 6px 2px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .3);
+    --md-sys-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, .15), 0 1px 3px rgba(0, 0, 0, .3);
+
+    /* ---- Shape ---- */
+    --md-sys-shape-corner-xl: 28px;
+    --md-sys-shape-corner-l: 16px;
+    --md-sys-shape-corner-m: 12px;
+    --md-sys-shape-corner-s: 8px;
+    --md-sys-shape-corner-full: 9999px;
+
+    /* ---- Motion ---- */
+    --md-sys-motion-emphasized: 0.4s cubic-bezier(0.2, 0, 0, 1);
+    --md-sys-motion-standard: 0.3s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ---------------------------------------------------------------------------
+   1. Reset & Base
+   --------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', 'Google Sans', system-ui, sans-serif;
+    background: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* ---------------------------------------------------------------------------
+   2. Typography (M3 type scale subset)
+   --------------------------------------------------------------------------- */
+.display-large {
+    font-family: 'Google Sans', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+}
+
+.headline-large {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.title-large {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.27;
+}
+
+.body-large {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.body-medium {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.43;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.body-small {
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.33;
+    color: var(--md-sys-color-outline);
+}
+
+.label-large {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+/* ---------------------------------------------------------------------------
+   3. Top App Bar
+   --------------------------------------------------------------------------- */
+.top-app-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--md-sys-color-surface);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    padding: 0.75rem 1.5rem;
+}
+
+.top-app-bar__inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.top-app-bar__icon {
+    font-size: 1.75rem;
+    color: var(--md-sys-color-primary);
+}
+
+.top-app-bar__title {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+}
+
+/* ---------------------------------------------------------------------------
+   4. Hero Section
+   --------------------------------------------------------------------------- */
+.hero {
+    position: relative;
+    padding: 5rem 2rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.hero__text {
+    position: relative;
+    z-index: 2;
+}
+
+.hero__text .display-large {
+    background: linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.hero__text .body-large {
+    max-width: 520px;
+}
+
+.hero__shape {
+    position: absolute;
+    top: -60px;
+    right: -100px;
+    z-index: 1;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(207, 188, 255, 0.12), transparent 70%);
+    filter: blur(40px);
+    animation: heroPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes heroPulse {
+    0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.2) translate(-30px, 20px);
+        opacity: 1;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   5. Surface Container (main wrapper)
+   --------------------------------------------------------------------------- */
+.surface-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+/* ---------------------------------------------------------------------------
+   6. Experiment Grid (cards)
+   --------------------------------------------------------------------------- */
+.experiment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.exp-card {
+    background: var(--md-sys-color-surface-container);
+    border-radius: var(--md-sys-shape-corner-xl);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform var(--md-sys-motion-emphasized),
+        box-shadow var(--md-sys-motion-emphasized);
+    border: 1px solid transparent;
+}
+
+.exp-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: var(--md-sys-elevation-3);
+    border-color: var(--md-sys-color-outline-variant);
+}
+
+.exp-card:active {
+    transform: scale(0.98);
+}
+
+.exp-card__img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: var(--md-sys-color-surface-container-highest);
+}
+
+.exp-card__body {
+    padding: 1.25rem 1.5rem;
+}
+
+.exp-card__title {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: var(--md-sys-color-on-surface);
+}
+
+.exp-card__sub {
+    font-size: 0.8rem;
+    color: var(--md-sys-color-outline);
+}
+
+/* Staggered fade-in for cards */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.exp-card {
+    animation: slideUp var(--md-sys-motion-emphasized) both;
+}
+
+/* ---------------------------------------------------------------------------
+   7. Hidden utility
+   --------------------------------------------------------------------------- */
+.hidden {
+    display: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+   8. Detail Layout
+   --------------------------------------------------------------------------- */
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.detail-card {
+    background: var(--md-sys-color-surface-container);
+    border-radius: var(--md-sys-shape-corner-xl);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    padding: 2rem;
+    animation: slideUp 0.5s ease both;
+}
+
+/* ---------------------------------------------------------------------------
+   9. Carousel
+   --------------------------------------------------------------------------- */
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    border-radius: var(--md-sys-shape-corner-l);
+    overflow: hidden;
+    background: var(--md-sys-color-surface-container-highest);
+    margin: 1.25rem 0;
+}
+
+.carousel__track {
+    display: flex;
+    height: 100%;
+    transition: transform var(--md-sys-motion-emphasized);
+}
+
+.carousel__track img {
+    min-width: 100%;
+    height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: var(--md-sys-shape-corner-full);
+    border: none;
+    background: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--md-sys-elevation-1);
+    transition: background var(--md-sys-motion-standard);
+    z-index: 3;
+}
+
+.carousel__btn:hover {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.carousel__btn--prev {
+    left: 12px;
+}
+
+.carousel__btn--next {
+    right: 12px;
+}
+
+.carousel__dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 3;
+}
+
+.carousel__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--md-sys-color-outline);
+    border: none;
+    cursor: pointer;
+    transition: background var(--md-sys-motion-standard), transform var(--md-sys-motion-standard);
+}
+
+.carousel__dot.active {
+    background: var(--md-sys-color-primary);
+    transform: scale(1.3);
+}
+
+/* ---------------------------------------------------------------------------
+   10. Audio Section
+   --------------------------------------------------------------------------- */
+.audio-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    background: var(--md-sys-color-surface-container-high);
+    border-radius: var(--md-sys-shape-corner-full);
+}
+
+.audio-section .material-symbols-outlined {
+    color: var(--md-sys-color-primary);
+}
+
+.audio-section audio {
+    flex: 1;
+    height: 36px;
+}
+
+/* Webkit audio overrides for dark theme */
+audio::-webkit-media-controls-panel {
+    background: transparent;
+}
+
+.narration-text {
+    margin-top: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--md-sys-color-surface-container-low);
+    border-radius: var(--md-sys-shape-corner-m);
+    border-left: 4px solid var(--md-sys-color-primary);
+    line-height: 1.7;
+}
+
+/* ---------------------------------------------------------------------------
+   11. Chat Card
+   --------------------------------------------------------------------------- */
+.chat-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 350px;
+    max-height: 520px;
+}
+
+.message {
+    max-width: 85%;
+    padding: 0.75rem 1rem;
+    border-radius: var(--md-sys-shape-corner-l);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    word-break: break-word;
+    animation: slideUp 0.25s ease both;
+}
+
+.message.user {
+    align-self: flex-end;
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border-bottom-right-radius: var(--md-sys-shape-corner-s);
+}
+
+.message.ai {
+    align-self: flex-start;
+    background: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+    border-bottom-left-radius: var(--md-sys-shape-corner-s);
+}
+
+.message.ai.typing {
+    color: var(--md-sys-color-outline);
+    font-style: italic;
+}
+
+.chat-input-area {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--md-sys-color-surface-container-low);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.chat-input {
+    flex: 1;
+    background: var(--md-sys-color-surface-container);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-on-surface);
+    padding: 0.7rem 1rem;
+    border-radius: var(--md-sys-shape-corner-full);
+    outline: none;
+    font-size: 0.9rem;
+    transition: border-color var(--md-sys-motion-standard);
+}
+
+.chat-input:focus {
+    border-color: var(--md-sys-color-primary);
+}
+
+.chat-input::placeholder {
+    color: var(--md-sys-color-outline);
+}
+
+/* ---------------------------------------------------------------------------
+   12. FAB (Floating Action Button)
+   --------------------------------------------------------------------------- */
+.fab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--md-sys-shape-corner-l);
+    transition: background var(--md-sys-motion-standard), box-shadow var(--md-sys-motion-standard);
+}
+
+.fab--primary {
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    box-shadow: var(--md-sys-elevation-2);
+    width: 48px;
+    height: 48px;
+}
+
+.fab--primary:hover {
+    box-shadow: var(--md-sys-elevation-3);
+}
+
+.fab--small {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--md-sys-shape-corner-m);
+}
+
+.fab--secondary {
+    background: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary);
+    box-shadow: var(--md-sys-elevation-1);
+    padding: 0.6rem 1.25rem;
+    gap: 0.5rem;
+}
+
+.fab--secondary:hover {
+    box-shadow: var(--md-sys-elevation-2);
+}
+
+/* ---------------------------------------------------------------------------
+   13. Loader
+   --------------------------------------------------------------------------- */
+.loader {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    gap: 1rem;
+}
+
+.loader__spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--md-sys-color-outline-variant);
+    border-top-color: var(--md-sys-color-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   14. Footer
+   --------------------------------------------------------------------------- */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+/* ---------------------------------------------------------------------------
+   15. Responsive
+   --------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+    .detail-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .chat-messages {
+        max-height: 400px;
+    }
+
+    .hero {
+        padding: 3rem 1.5rem 2rem;
+    }
+
+    .hero__shape {
+        width: 260px;
+        height: 260px;
+        right: -60px;
+    }
+}
+
+@media (max-width: 600px) {
+    .experiment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero__text .display-large {
+        font-size: 2rem;
+    }
+
+    .surface-container {
+        padding: 0 1rem 2rem;
+    }
+
+    .top-app-bar {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   16. Scrollbar (M3 feel)
+   --------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--md-sys-color-outline-variant);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--md-sys-color-outline);
+}

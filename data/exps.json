@@ -1,0 +1,118 @@
+﻿{
+  "BKR-01": {
+    "apparatus": "BAKER Dead Weight Tester",
+    "narration_script": "The BAKER Dead Weight Tester is used for fundamental calibration of pressure measuring instruments such as strain gauges and pressure gauges. It works on the principle of balancing a known weight over a calibrated piston area to generate precise pressure.",
+    "images": [
+      "https://nagman.com/wp-content/uploads/2023/12/H6900.webp"
+    ],
+    "audio_loc": "audio/BKR-01.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-01"
+  },
+  "BKR-02": {
+    "apparatus": "BAKER Linear and Angular Measurement Instruments",
+    "narration_script": "This setup includes Vernier Calipers, Screw Gauges, Dial Gauges, Height Gauges, and Bevel Protectors for precision dimensional measurement and error analysis.",
+    "images": [
+      "https://bakergauges.com/wp-content/uploads/2015/04/prod-feat-VCF20.jpg",
+      "https://bakergauges.com/wp-content/uploads/2015/03/prod-feat-digitmicromet-mec-100.jpg"
+    ],
+    "audio_loc": "audio/BKR-02.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-02"
+  },
+  "BKR-03": {
+    "apparatus": "BAKER Go-No Go Limit Gauges",
+    "narration_script": "BAKER Limit Gauges demonstrate Goâ€“No Go gauging based on Taylorâ€™s Principle for checking maximum and minimum material conditions.",
+    "images": [
+      "https://industrofy.com/cdn/shop/files/baker-make-thread-plug-guage.png?v=1757314075&width=950",
+      "https://2.imimg.com/data2/OS/XC/IMFCP-1480317/product_95-250x250.gif"
+    ],
+    "audio_loc": "audio/BKR-03.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-03"
+  },
+  "BKR-04": {
+    "apparatus": "BAKER Surface Roughness Tester",
+    "narration_script": "The BAKER Surface Roughness Tester measures surface texture parameters such as Ra using a stylus-based profiling system.",
+    "images": [
+      "https://bakergauges.com/wp-content/uploads/2020/09/TAD1684-scaled.jpg"
+    ],
+    "audio_loc": "audio/BKR-04.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-04"
+  },
+  "BKR-05": {
+    "apparatus": "BAKER Optical Projector and Tool Makersâ€™ Microscope",
+    "narration_script": "This apparatus is used for optical inspection and non-contact measurement of tool geometry and small components.",
+    "images": [
+      "https://www.sipconinstrument.com/media/products/tool-makers-microscope4.jpg",
+      "https://bakergauges.com/wp-content/uploads/2019/05/SM350.jpg"
+    ],
+    "audio_loc": "audio/BKR-05.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-05"
+  },
+  "BKR-06": {
+    "apparatus": "BAKER Electrical, Mechanical, Optical and Pneumatic Comparators",
+    "narration_script": "These comparators are used for detecting small dimensional deviations by comparing test components with master standards.",
+    "images": [
+      "https://5.imimg.com/data5/SELLER/Default/2021/7/HO/FU/YN/1865318/baker-dial-indicator.jpg",
+      "https://www.elprocus.com/wp-content/uploads/Pneumatic-Comparator.jpg"
+    ],
+    "audio_loc": "audio/BKR-06.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-06"
+  },
+  "BKR-07": {
+    "apparatus": "BAKER Strain Gauge Experimental Setup",
+    "narration_script": "This setup determines modulus of elasticity using strain gauges by measuring resistance variation under applied stress.",
+    "images": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_1oMUsTNzXC-kA7Bx6DC0m-tBeEMxXO-ItA&s"
+    ],
+    "audio_loc": "audio/BKR-07.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-07"
+  },
+  "BKR-08": {
+    "apparatus": "BAKER Gear Tooth Vernier Caliper and Thermocouple Calibration Setup",
+    "narration_script": "This setup includes calibration of thermocouples and gear tooth measurements using a Gear Tooth Vernier Caliper.",
+    "images": [
+      "https://www.yuzuki.co.in/wp-content/uploads/2018/11/Digital-Gear-Tooth-Caliper-1.jpg",
+      "https://3.imimg.com/data3/IA/MI/MY-5504636/temperature-calibration-500x500.jpg"
+    ],
+    "audio_loc": "audio/BKR-08.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-08"
+  },
+  "BKR-09": {
+    "apparatus": "BAKER Stroboscope and Speed Pickup Calibration Setup",
+    "narration_script": "This setup measures and calibrates rotational speed using stroboscopic light pulses and magnetic/photo pickups.",
+    "images": [
+      "https://image.made-in-china.com/2f0j00GZLoOyFmQIkD/Stroboscopic-Tachometer-Digital-and-Portable-Stroboscope.webp",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKJSToq8af2AYXzIHW_5vS27e731Ez9XNDHQ&s"
+    ],
+    "audio_loc": "audio/BKR-09.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-09"
+  },
+  "BKR-10": {
+    "apparatus": "BAKER Flow Rate Measurement Setup",
+    "narration_script": "This apparatus is used for flow rate calibration using anemometers and ultrasonic flow meters, including RPN analysis for risk evaluation.",
+    "images": [
+      "https://www.bakerhughes.com/sites/bakerhughes/files/2021-12/panaflowz3-front.jpg",
+      "https://fluidhandlingpro.com/wp-content/uploads/2020/04/Anemometers.jpg"
+    ],
+    "audio_loc": "audio/BKR-10.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-10"
+  },
+  "BKR-11": {
+    "apparatus": "BAKER Coordinate Measuring Machine (CMM)",
+    "narration_script": "The BAKER CMM verifies geometric tolerances using coordinate-based 3D measurement as per ISO 10360-5:2020.",
+    "images": [
+      "https://bakergauges.com/wp-content/uploads/2021/04/Horizon-CMM-1-e1618392625859-480x595.jpg"
+    ],
+    "audio_loc": "audio/BKR-11.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-11"
+  },
+  "BKR-12": {
+    "apparatus": "BAKER Digital Metrology and Scilab Application Station",
+    "narration_script": "This station integrates measurement data with computational tools like Scilab for digital metrology analysis and calculator/app development.",
+    "images": [
+      "https://bakergauges.com/wp-content/uploads/2015/04/feat_airgaug.jpg",
+      "https://www.scilab.org/sites/default/files/flexdock2.png"
+    ],
+    "audio_loc": "audio/BKR-12.mp3",
+    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-12"
+  }
+}

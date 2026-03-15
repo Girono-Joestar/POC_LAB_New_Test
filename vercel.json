@@ -1,0 +1,39 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "api/main.py",
+            "use": "@vercel/python"
+        },
+        {
+            "src": "public/**",
+            "use": "@vercel/static"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "/api/main.py"
+        },
+        {
+            "src": "/secret-admin-portal",
+            "dest": "/public/admin_5502.html"
+        },
+        {
+            "src": "/style.css",
+            "dest": "/public/style.css"
+        },
+        {
+            "src": "/app.js",
+            "dest": "/public/app.js"
+        },
+        {
+            "src": "/audio/(.*)",
+            "dest": "/public/audio/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/public/$1"
+        }
+    ]
+}

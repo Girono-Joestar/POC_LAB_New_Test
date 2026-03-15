@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>System Panel</title>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto+Mono:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ---- Admin-specific overrides ---- */
+        .admin-wrapper {
+            max-width: 960px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .admin-login {
+            max-width: 400px;
+            margin: 6rem auto;
+            background: var(--md-sys-color-surface-container);
+            padding: 2.5rem;
+            border-radius: var(--md-sys-shape-corner-xl);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            text-align: center;
+            animation: slideUp 0.4s ease both;
+        }
+
+        .admin-login h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .field {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .field input,
+        .field textarea {
+            width: 100%;
+            background: var(--md-sys-color-surface-container-high);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            color: var(--md-sys-color-on-surface);
+            padding: 0.7rem 1rem;
+            border-radius: var(--md-sys-shape-corner-m);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color var(--md-sys-motion-standard);
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            border-color: var(--md-sys-color-primary);
+        }
+
+        .btn-filled {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: var(--md-sys-shape-corner-full);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: box-shadow var(--md-sys-motion-standard);
+        }
+
+        .btn-filled:hover {
+            box-shadow: var(--md-sys-elevation-2);
+        }
+
+        .btn-tonal {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary);
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--md-sys-shape-corner-full);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .admin-panel {
+            animation: slideUp 0.4s ease both;
+        }
+
+        .section-card {
+            background: var(--md-sys-color-surface-container);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-xl);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Google Sans', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        #json-editor {
+            width: 100%;
+            min-height: 440px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--md-sys-shape-corner-full);
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 200;
+            animation: slideUp 0.3s ease both;
+        }
+
+        .toast--success {
+            background: #2e7d32;
+            color: #fff;
+        }
+
+        .toast--error {
+            background: var(--md-sys-color-error);
+            color: var(--md-sys-color-on-error);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+    <div id="login-section" class="admin-login">
+        <span class="material-symbols-outlined"
+            style="font-size:3rem;color:var(--md-sys-color-primary)">admin_panel_settings</span>
+        <h2 class="headline-large">Admin Access</h2>
+        <div class="field">
+            <label for="admin-token">Secret Token</label>
+            <input type="password" id="admin-token" placeholder="Enter your admin token">
+        </div>
+        <button onclick="doLogin()" class="btn-filled">
+            <span class="material-symbols-outlined" style="font-size:1.1rem">login</span>
+            Authenticate
+        </button>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="admin-section" class="admin-wrapper hidden">
+        <div class="admin-panel">
+            <h2 class="headline-large" style="margin-bottom:1.5rem;">
+                <span class="material-symbols-outlined"
+                    style="vertical-align:middle;margin-right:0.5rem;">dashboard_customize</span>
+                Admin Dashboard
+            </h2>
+
+            <!-- Settings Card -->
+            <div class="section-card">
+                <h3><span class="material-symbols-outlined">key</span> Global Settings</h3>
+                <div class="field">
+                    <label for="admin-api-key">Gemini API Key</label>
+                    <input type="text" id="admin-api-key" placeholder="AIza…">
+                </div>
+            </div>
+
+            <!-- JSON Editor Card -->
+            <div class="section-card">
+                <h3><span class="material-symbols-outlined">data_object</span> Experiment Data (JSON)</h3>
+                <textarea id="json-editor"></textarea>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+                <button onclick="saveAll()" class="btn-filled">
+                    <span class="material-symbols-outlined" style="font-size:1.1rem">save</span>
+                    Save All Changes
+                </button>
+                <button onclick="formatJSON()" class="btn-tonal">
+                    <span class="material-symbols-outlined" style="font-size:1.1rem">format_align_left</span>
+                    Format JSON
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ---- Logging Utility ----
+        const ALOG = '[ADMIN]';
+        const alog = {
+            info: (...a) => console.log(`${ALOG} ℹ️`, new Date().toISOString(), ...a),
+            warn: (...a) => console.warn(`${ALOG} ⚠️`, new Date().toISOString(), ...a),
+            error: (...a) => console.error(`${ALOG} ❌`, new Date().toISOString(), ...a),
+            net: (...a) => console.log(`${ALOG} 🌐`, new Date().toISOString(), ...a),
+        };
+
+        alog.info('Admin portal loaded');
+
+        let adminToken = '';
+
+        // ---- Login ----
+        async function doLogin() {
+            adminToken = document.getElementById('admin-token').value.trim();
+            if (!adminToken) { toast('Token required', 'error'); alog.warn('Login attempted with empty token'); return; }
+
+            alog.info('🔐 Login attempt…');
+            const startTime = performance.now();
+
+            try {
+                alog.net('→ GET /api/admin/settings');
+                const sRes = await fetch(`/api/admin/settings?token=${encodeURIComponent(adminToken)}`);
+                alog.net(`← GET /api/admin/settings → ${sRes.status}`);
+                if (!sRes.ok) {
+                    alog.error('🚫 Login FAILED — invalid token (HTTP ' + sRes.status + ')');
+                    toast('Invalid token', 'error');
+                    return;
+                }
+
+                const settings = await sRes.json();
+                alog.info('✅ Authentication successful — settings loaded');
+                alog.info(`🔑 API key configured: ${settings.GEMINI_API_KEY ? 'YES (…' + settings.GEMINI_API_KEY.slice(-4) + ')' : 'NO'}`);
+                document.getElementById('admin-api-key').value = settings.GEMINI_API_KEY || '';
+
+                // Load experiment data
+                alog.info('📋 Loading experiment data…');
+                alog.net('→ GET /api/experiments');
+                const listRes = await fetch('/api/experiments');
+                const list = await listRes.json();
+                alog.info(`📋 Found ${list.length} experiments — fetching full details…`);
+
+                const allData = {};
+                for (const item of list) {
+                    alog.net(`→ GET /api/experiments/${item.id}`);
+                    const dRes = await fetch(`/api/experiments/${item.id}`);
+                    allData[item.id] = await dRes.json();
+                    alog.info(`  ✓ ${item.id}: "${item.apparatus}"`);
+                }
+
+                const elapsed = (performance.now() - startTime).toFixed(0);
+                alog.info(`✅ All data loaded in ${elapsed}ms — ${Object.keys(allData).length} experiments`);
+
+                document.getElementById('json-editor').value = JSON.stringify(allData, null, 4);
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('admin-section').classList.remove('hidden');
+            } catch (err) {
+                alog.error('💥 Login failed with exception:', err.message, err);
+                toast('Login failed: ' + err.message, 'error');
+            }
+        }
+
+        // ---- Save ----
+        async function saveAll() {
+            alog.info('💾 Save initiated…');
+            const content = document.getElementById('json-editor').value;
+            const apiKey = document.getElementById('admin-api-key').value.trim();
+
+            let parsed;
+            try {
+                parsed = JSON.parse(content);
+                alog.info(`📄 JSON parsed successfully — ${Object.keys(parsed).length} experiment entries`);
+            } catch (e) {
+                alog.error('📄 JSON parse error:', e.message);
+                toast('Invalid JSON — fix syntax errors first', 'error');
+                return;
+            }
+
+            alog.info(`🔑 API key to save: ${apiKey ? 'YES (' + apiKey.length + ' chars)' : 'EMPTY'}`);
+
+            const startTime = performance.now();
+            try {
+                alog.net('→ POST /api/admin/update');
+                const res = await fetch('/api/admin/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ secret_token: adminToken, data: parsed, api_key: apiKey }),
+                });
+                const result = await res.json();
+                const elapsed = (performance.now() - startTime).toFixed(0);
+
+                if (result.status === 'success') {
+                    alog.info(`✅ Save successful in ${elapsed}ms`);
+                    toast('Saved successfully!', 'success');
+                } else {
+                    alog.error(`❌ Save failed: ${result.detail || 'Unknown error'}`);
+                    toast('Error: ' + (result.detail || 'Unknown'), 'error');
+                }
+            } catch (err) {
+                alog.error('💥 Save request failed:', err.message, err);
+                toast('Save failed: ' + err.message, 'error');
+            }
+        }
+
+        // ---- Format ----
+        function formatJSON() {
+            alog.info('🔧 Formatting JSON…');
+            const editor = document.getElementById('json-editor');
+            try {
+                const parsed = JSON.parse(editor.value);
+                editor.value = JSON.stringify(parsed, null, 4);
+                alog.info(`✅ JSON formatted — ${Object.keys(parsed).length} entries`);
+                toast('Formatted!', 'success');
+            } catch (e) {
+                alog.error('🔧 Format failed — invalid JSON:', e.message);
+                toast('Cannot format — invalid JSON', 'error');
+            }
+        }
+
+        // ---- Toast ----
+        function toast(msg, type) {
+            alog.info(`🍞 Toast [${type}]: ${msg}`);
+            const el = document.createElement('div');
+            el.className = `toast toast--${type}`;
+            el.textContent = msg;
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 3000);
+        }
+
+        // ---- Global error handler ----
+        window.onerror = (msg, src, line, col, err) => alog.error('Uncaught:', msg, `at ${src}:${line}:${col}`, err);
+        window.onunhandledrejection = (e) => alog.error('Unhandled rejection:', e.reason);
+
+        // Enter key to login
+        document.getElementById('admin-token').addEventListener('keydown', e => {
+            if (e.key === 'Enter') doLogin();
+        });
+    </script>
+</body>
+
+</html>
