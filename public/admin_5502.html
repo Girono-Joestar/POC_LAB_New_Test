@@ -357,13 +357,7 @@
     </div>
 
     <div class="field">
-        <label for="f-thumbnail">Thumbnail URL (card image)</label>
-        <input type="text" id="f-thumbnail" placeholder="https://example.com/image.jpg">
-        <div class="field-hint">Direct link to image for experiment cards. Leave blank for gradient placeholder.</div>
-    </div>
-
-    <div class="field">
-        <label>Image URLs (carousel)</label>
+        <label>Image URLs</label>
         <div id="f-images" class="dynamic-list"></div>
         <button class="add-item-btn" onclick="addListItem('f-images','https://…')">
             <span class="material-symbols-outlined" style="font-size:.9rem">add</span>Add Image URL
@@ -606,7 +600,6 @@ function openEditExp(id) {
         : (exp.theory || '');
     document.getElementById('f-audio-loc').value = exp.audio_loc || `audio/${id}.mp3`;
     document.getElementById('f-qr-addr').value = exp.qr_addr || '';
-    document.getElementById('f-thumbnail').value = exp.thumbnail || '';
 
     (exp.objectives || []).forEach(o => addListItem('f-objectives', o, o));
     (exp.key_points || []).forEach(k => addListItem('f-keypoints', k, k));
@@ -633,7 +626,7 @@ function openEditExp(id) {
 }
 
 function clearExpForm() {
-    ['f-exp-id','f-apparatus','f-short-desc','f-narration','f-theory','f-audio-loc','f-qr-addr','f-thumbnail'].forEach(id => {
+    ['f-exp-id','f-apparatus','f-short-desc','f-narration','f-theory','f-audio-loc','f-qr-addr'].forEach(id => {
         const el = document.getElementById(id);
         el.value = '';
         el.disabled = false;
@@ -679,7 +672,6 @@ async function saveExpForm() {
         key_points: getListValues('f-keypoints'),
         formulas: getListValues('f-formulas'),
         images: getListValues('f-images'),
-        thumbnail: document.getElementById('f-thumbnail').value.trim(),
         audio_loc: document.getElementById('f-audio-loc').value.trim() || `audio/${id}.mp3`,
         qr_addr: document.getElementById('f-qr-addr').value.trim(),
     };
@@ -705,15 +697,8 @@ async function saveExpForm() {
             closeSlide();
             await loadExperiments();
         } else {
-            let detail = `HTTP ${res.status}`;
-            try {
-                const err = await res.json();
-                detail = err.detail || detail;
-            } catch (_) {
-                const text = await res.text().catch(() => '');
-                if (text) detail = text.substring(0, 120);
-            }
-            showToast('Error: ' + detail, 'error');
+            const err = await res.json();
+            showToast('Error: ' + (err.detail || 'Unknown'), 'error');
         }
     } catch (e) {
         showToast('Save failed: ' + e.message, 'error');

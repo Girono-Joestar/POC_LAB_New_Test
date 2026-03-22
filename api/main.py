@@ -264,7 +264,7 @@ async def list_experiments(lab: Optional[str] = None):
             "apparatus": v.get("apparatus", "Untitled"),
             "short_desc": v.get("short_desc", v.get("narration_script", "")[:80]),
             "lab_id": v.get("lab_id", ""),
-            "thumbnail": v.get("thumbnail") or (v["images"][0] if v.get("images") else ""),
+            "thumbnail": v.get("thumbnail") or (v["images"][0] if v.get("images") else None),
         })
     logger.info("📋 Listing experiments — %d found (lab_filter=%s)", len(result), lab)
     return result
@@ -447,7 +447,6 @@ async def admin_add_experiment(lab_id: str, req: ExpCreateRequest):
     exp_data = dict(req.data)
     exp_data["lab_id"] = lab_id
     exp_data.setdefault("audio_loc", f"audio/{req.exp_id}.mp3")
-    exp_data.setdefault("thumbnail", "")
     exp_data.setdefault("images", [])
 
     exps[req.exp_id] = exp_data
@@ -481,15 +480,7 @@ async def admin_update_experiment(exp_id: str, req: ExpUpdateRequest):
 
     old_lab = exps[exp_id].get("lab_id")
     exps[exp_id].update(req.data)
-
-    try:
-        save_exps(exps)
-    except PermissionError:
-        raise HTTPException(status_code=501,
-            detail="Filesystem is read-only (Vercel?). Run admin locally.")
-    except Exception as e:
-        logger.error("💾 Save failed: %s", e)
-        raise HTTPException(status_code=500, detail=f"Save failed: {e}")
+    save_exps(exps)
 
     # Invalidate RAG
     try:

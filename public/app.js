@@ -86,26 +86,15 @@ function renderList(experiments) {
         card.style.animationDelay = `${i * 0.07}s`;
         card.setAttribute('data-exp-id', exp.id);
 
-        const thumb = exp.thumbnail;
+        const thumb = exp.thumbnail || (exp.images?.length > 0 ? exp.images[0] : 'https://placehold.co/600x400/1a237e/ffffff?text=MQC+Lab');
         const desc  = exp.short_desc || (exp.narration_script ? exp.narration_script.substring(0, 90) + '…' : 'Tap to explore');
-        const title = exp.apparatus || exp.id;
 
-        if (thumb) {
-            card.innerHTML = `
-                <img class="exp-card__img" src="${thumb}" alt="${escHtml(title)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                <div class="exp-card__img-placeholder" style="display:none"><span>${escHtml(title)}</span></div>
-                <div class="exp-card__body">
-                    <p class="exp-card__title">${escHtml(title)}</p>
-                    <p class="exp-card__sub">${escHtml(desc)}</p>
-                </div>`;
-        } else {
-            card.innerHTML = `
-                <div class="exp-card__img-placeholder"><span>${escHtml(title)}</span></div>
-                <div class="exp-card__body">
-                    <p class="exp-card__title">${escHtml(title)}</p>
-                    <p class="exp-card__sub">${escHtml(desc)}</p>
-                </div>`;
-        }
+        card.innerHTML = `
+            <img class="exp-card__img" src="${thumb}" alt="${escHtml(exp.apparatus)}" onerror="this.src='https://placehold.co/600x400/455a64/ffffff?text=Image+Unavailable'">
+            <div class="exp-card__body">
+                <p class="exp-card__title">${escHtml(exp.apparatus)}</p>
+                <p class="exp-card__sub">${escHtml(desc)}</p>
+            </div>`;
         card.onclick = () => showDetails(exp.id);
         $list.appendChild(card);
     });
@@ -149,7 +138,7 @@ async function showDetails(id) {
         }
 
         // Carousel
-        carouselImages = exp.images?.length > 0 ? exp.images : [];
+        carouselImages = (exp.images && exp.images.length > 0) ? exp.images : (exp.thumbnail ? [exp.thumbnail] : ['https://placehold.co/600x400/37474f/ffffff?text=No+Images+Available']);
         carouselIndex = 0;
         buildCarousel();
 
@@ -288,22 +277,11 @@ function populateKeyPoints(exp) {
 function buildCarousel() {
     $track.innerHTML = '';
     $dots.innerHTML = '';
-
-    // Hide carousel entirely if no images
-    const carouselContainer = $track.closest('.carousel') || $track.parentElement;
-    if (carouselImages.length === 0) {
-        if (carouselContainer) carouselContainer.style.display = 'none';
-        $prevBtn.classList.add('hidden');
-        $nextBtn.classList.add('hidden');
-        return;
-    }
-    if (carouselContainer) carouselContainer.style.display = '';
-
     carouselImages.forEach((src, i) => {
         const img = document.createElement('img');
         img.src = src;
         img.alt = `Experiment image ${i + 1}`;
-        img.onerror = () => { img.style.display = 'none'; };
+        img.onerror = () => { img.src = `https://placehold.co/600x400/455a64/ffffff?text=Image+Unavailable`; };
         $track.appendChild(img);
 
         const dot = document.createElement('button');

@@ -18,17 +18,13 @@
 
 POC AI Lab is an interactive web application for a university metrology and instrumentation laboratory. Students scan QR codes placed next to lab equipment and are taken to a page with:
 
-- **Thumbnail cards** for each experiment (admin-configurable URL or gradient placeholder)
 - **Images** of the apparatus (carousel)
 - **Audio narration** describing the experiment
-- **AI chatbot** (LangChain + NVIDIA NIM) that answers questions in context
+- **AI chatbot** (Google Gemini) that answers questions in context
 
 An **admin portal** is hidden from public access and allows the administrator to:
-- Add / edit / delete experiments via a form-based UI
-- Manage labs (multi-lab support)
-- Set thumbnail URLs for experiment cards
-- Update API keys (universal or per-lab)
-- Generate audio narrations
+- Edit experiment data (JSON)
+- Update the Gemini API key at runtime
 
 ---
 
@@ -67,8 +63,7 @@ An **admin portal** is hidden from public access and allows the administrator to
 |----------|-----------------------------|
 | Frontend | HTML5, CSS3, Vanilla JS     |
 | Backend  | Python 3.10+, FastAPI       |
-| AI       | LangChain + NVIDIA NIM      |
-| RAG      | FAISS vector store          |
+| AI       | Google Gemini 2.0 Flash     |
 | Hosting  | Vercel (Serverless)         |
 | Design   | Material 3 Expressive       |
 
@@ -79,26 +74,24 @@ An **admin portal** is hidden from public access and allows the administrator to
 ```
 POC_AI_LAB/
 ├── api/
-│   ├── main.py              # FastAPI backend (serverless function on Vercel)
-│   ├── agent.py             # LangChain AI agent with tools
-│   ├── rag_builder.py       # FAISS RAG vector store builder
-│   └── rate_limiter.py      # API rate limiting utility
+│   └── main.py              # FastAPI backend (serverless function on Vercel)
 ├── data/
-│   ├── exps.json             # Experiment data (with thumbnail field)
-│   ├── labs.json             # Lab registry (multi-lab support)
-│   ├── settings.json         # Runtime settings (API key config)
+│   ├── exps.json             # Experiment data (server-side only, not in public/)
+│   ├── settings.json         # Runtime settings (API key override)
 │   └── *.mp3                 # Source audio files
 ├── public/                   # Served as static assets by Vercel
 │   ├── index.html            # Main public page
 │   ├── style.css             # Material 3 Expressive design system
 │   ├── app.js                # Frontend logic (experiments, carousel, chat)
-│   ├── admin_5502.html       # Hidden admin portal (form-based)
+│   ├── admin_5502.html       # Hidden admin portal
 │   └── audio/                # Audio files served to browser
-│       └── MQC-*.mp3
-├── tests/
-│   └── smoke_test.py         # Endpoint smoke tests
-├── generate_audio.py         # gTTS audio generation script
-├── .env                      # Local env vars (NVIDIA_API_KEY, ADMIN_TOKEN)
+│       └── BKR-*.mp3
+├── prototype_backup/         # Old Streamlit code (archived, not deployed)
+│   ├── main.py
+│   ├── audio_narr_gen.py
+│   ├── gen_qr.py
+│   └── ngrok_watchdog.ps1
+├── .env                      # Local env vars (GKEY, ADMIN_TOKEN)
 ├── requirements.txt          # Python dependencies
 └── vercel.json               # Vercel config (rewrites, functions)
 ```
@@ -112,20 +105,18 @@ Health check.
 **Response:** `{ "status": "ok" }`
 
 ### `GET /api/experiments`
-Returns a lightweight list of all experiments. Supports `?lab=MQC` filter.  
+Returns a lightweight list of all experiments.  
 **Response:**
 ```json
 [
   {
-    "id": "MQC-01",
-    "apparatus": "Linear Measurement Instruments",
-    "short_desc": "Measure component dimensions…",
-    "lab_id": "MQC",
-    "thumbnail": "https://example.com/image.jpg"
+    "id": "BKR-01",
+    "apparatus": "BAKER Dead Weight Tester",
+    "narration_script": "The BAKER Dead Weight Tester…",
+    "thumbnail": "https://…/H6900.webp"
   }
 ]
 ```
-> **Note:** `thumbnail` prefers the dedicated `thumbnail` field, falls back to `images[0]`, or returns `""` if neither is set.
 
 ### `GET /api/experiments/{exp_id}`
 Returns full detail for one experiment.  
@@ -143,22 +134,19 @@ Send a student question, get an AI response in experiment context.
 **Response:** `{ "reply": "The dead weight tester works by…" }`
 
 ### `GET /api/admin/settings?token=<TOKEN>`
-Returns settings and lab config. **403** if token is wrong.
+Returns `settings.json` contents. **403** if token is wrong.
 
-### `POST /api/admin/settings`
-Update universal API key or per-lab key overrides.
-
-### `PUT /api/admin/experiments/{exp_id}`
-Update experiment data (including `thumbnail`, `images`, etc.).
-
-### `POST /api/admin/labs/{lab_id}/experiments`
-Create a new experiment under a lab.
-
-### `DELETE /api/admin/experiments/{exp_id}`
-Delete an experiment.
-
-### `POST /api/admin/experiments/{exp_id}/generate-audio`
-Generate audio narration using gTTS.
+### `POST /api/admin/update`
+Update experiment data and/or API key.  
+**Body:**
+```json
+{
+  "secret_token": "<ADMIN_TOKEN>",
+  "data": { "BKR-01": { … } },
+  "api_key": "AIza…"
+}
+```
+**Response:** `{ "status": "success" }`
 
 ---
 
@@ -193,18 +181,14 @@ This URL is not linked from any public page. It is mapped via `vercel.json` to `
 
 **Features:**
 1. Token-based authentication (matches `ADMIN_TOKEN` env var)
-2. **Experiments** — Card grid with Edit/Delete per card + form-based Add/Edit
-3. **Labs** — Create/delete labs, set lab name and description
-4. **Settings** — Universal API key + per-lab API key overrides
-5. **Thumbnail URL** — Dedicated field per experiment for card images
-6. **Image URLs** — Carousel image management
-7. **Audio** — Preview player + server-side generation trigger
-8. Toast notifications for success/error feedback
-9. Confirmation dialogs for delete operations
+2. View/edit the Gemini API key
+3. View/edit the full experiment JSON
+4. Format JSON button for readability
+5. Toast notifications for success/error feedback
 
 **Security:**
 - `<meta name="robots" content="noindex, nofollow">` prevents search engine indexing
-- The page title is generic ("Lab Admin Panel") to avoid discoverability
+- The page title is generic ("System Panel") to avoid discoverability
 - No links point to this page from anywhere in the codebase
 
 ---
@@ -227,7 +211,7 @@ This URL is not linked from any public page. It is mapped via `vercel.json` to `
 ### Prerequisites
 - Node.js (for Vercel CLI)
 - Python 3.10+
-- A NVIDIA NIM API key
+- A Google Gemini API key
 
 ### Steps
 
@@ -239,7 +223,7 @@ This URL is not linked from any public page. It is mapped via `vercel.json` to `
 2. **Set environment variables** in Vercel Dashboard:
    | Variable       | Description                    | Example                          |
    |----------------|--------------------------------|----------------------------------|
-   | `NVIDIA_API_KEY`| NVIDIA NIM API key             | `nvapi-…`                        |
+   | `GKEY`         | Gemini API key (fallback)      | `AIzaSy…`                       |
    | `ADMIN_TOKEN`  | Secret token for admin access  | `my-very-long-random-string-42` |
 
 3. **Deploy:**
@@ -271,7 +255,7 @@ Vercel serverless functions have a **read-only filesystem**. Changes made via th
 
 3. **Set environment variables** (already in `.env`):
    ```
-   NVIDIA_API_KEY=nvapi-…
+   GKEY=AIza…
    ADMIN_TOKEN=supersecret
    ```
 
@@ -293,11 +277,9 @@ Vercel serverless functions have a **read-only filesystem**. Changes made via th
 
 | Problem                        | Solution                                                      |
 |--------------------------------|---------------------------------------------------------------|
-| "No API key configured"        | Set `NVIDIA_API_KEY` in `.env` or update via admin portal     |
+| "Gemini API key not configured"| Set `GKEY` in `.env` or update via admin portal               |
 | Carousel shows no images       | Check that image URLs in `exps.json` are valid and accessible |
-| Card shows gradient instead    | Set a thumbnail URL via Admin → Edit experiment → Thumbnail URL |
 | Audio doesn't play             | Ensure `audio/*.mp3` files exist in `public/audio/`           |
 | Admin page returns 404         | Verify `vercel.json` has the rewrite for `/secret-admin-portal` |
-| Chat returns 502               | API error — check key validity or rate limits                 |
+| Chat returns 502               | Gemini API error — check key validity or rate limits          |
 | Changes lost after redeploy    | Expected on Vercel — use env vars for permanent config        |
-| Admin save returns 500         | Filesystem may be read-only (Vercel) — run admin locally      |

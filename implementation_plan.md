@@ -168,7 +168,7 @@ Complete rewrite of the panel section (login remains). New layout:
 - [showDetails()](file:///i:/Rishab/Programming/mahajan%20sir/POC_AI_LAB/public/app.js#136-177) now populates tabs from new experiment fields
 - Audio player shows step-by-step narration text highlighted as audio plays (using rough 1 sentence/5s estimate)
 - Chat greeting changes per experiment: `"I'm your MQC Lab assistant — feel free to ask me anything about [apparatus]!"`
-- Card thumbnails use admin-configured URL or a CSS gradient placeholder when no URL is set
+- Placeholder image: `https://placehold.co/600x400?text=MQC+Lab` when no image
 
 #### [MODIFY] [style.css](file:///i:/Rishab/Programming/mahajan%20sir/POC_AI_LAB/public/style.css)
 - Add tab strip styles
