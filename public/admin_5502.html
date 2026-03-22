@@ -705,8 +705,15 @@ async function saveExpForm() {
             closeSlide();
             await loadExperiments();
         } else {
-            const err = await res.json();
-            showToast('Error: ' + (err.detail || 'Unknown'), 'error');
+            let detail = `HTTP ${res.status}`;
+            try {
+                const err = await res.json();
+                detail = err.detail || detail;
+            } catch (_) {
+                const text = await res.text().catch(() => '');
+                if (text) detail = text.substring(0, 120);
+            }
+            showToast('Error: ' + detail, 'error');
         }
     } catch (e) {
         showToast('Save failed: ' + e.message, 'error');

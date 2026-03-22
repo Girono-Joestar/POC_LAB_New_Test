@@ -3,14 +3,14 @@
 I have migrated your Streamlit prototype to a professional **FastAPI + HTML/CSS** architecture optimized for **Vercel**.
 
 ## 🏗️ New Architecture
-- **Backend (`api/main.py`)**: A FastAPI server that handles data retrieval, AI chat with Gemini, and secure admin updates.
+- **Backend (`api/main.py`)**: A FastAPI server that handles data retrieval, AI chat with LangChain + NVIDIA NIM, and secure admin updates.
 - **Frontend (`public/`)**: A modern, premium dark-themed UI.
 - **Admin Portal**: Hidden at `/secret-admin-portal`. Use your `ADMIN_TOKEN` to login.
-- **Dynamic Configuration**: You can now change the **Gemini API Key** directly from the Admin Portal!
+- **Dynamic Configuration**: You can change the **API Key**, **thumbnail URLs**, and experiment data directly from the Admin Portal!
 
 ## 🔒 Security & Persistence
 - **API Key**: The key is stored in `data/settings.json`.
-- **Vercel Note**: Vercel's filesystem is read-only. Changes made via the Admin Portal on Vercel will not persist after a redeploy/restart. For permanent changes, please update the environment variables (`GKEY`) in your Vercel Dashboard or contact me to integrate a database (like Redis).
+- **Vercel Note**: Vercel's filesystem is read-only. Changes made via the Admin Portal on Vercel will not persist after a redeploy/restart. For permanent changes, please update the environment variables (`NVIDIA_API_KEY`) in your Vercel Dashboard or contact me to integrate a database (like Redis).
 - **Hidden Data**: `exps.json` is not in the `public/` folder, preventing direct browser access.
 
 ## 📁 Project Cleanup
@@ -26,7 +26,7 @@ I have migrated your Streamlit prototype to a professional **FastAPI + HTML/CSS*
 2.  **Login**: `vercel login`.
 3.  **Deploy**: Run `vercel` in the root directory.
 4.  **Environment Variables**: In the Vercel Dashboard, set the following:
-    - `GKEY`: Your Gemini API Key.
+    - `NVIDIA_API_KEY`: Your NVIDIA NIM API Key.
     - `ADMIN_TOKEN`: A secret password for admin edits (default is `supersecret`).
 
 ## 🔑 Accessing the Admin Portal

@@ -481,7 +481,15 @@ async def admin_update_experiment(exp_id: str, req: ExpUpdateRequest):
 
     old_lab = exps[exp_id].get("lab_id")
     exps[exp_id].update(req.data)
-    save_exps(exps)
+
+    try:
+        save_exps(exps)
+    except PermissionError:
+        raise HTTPException(status_code=501,
+            detail="Filesystem is read-only (Vercel?). Run admin locally.")
+    except Exception as e:
+        logger.error("💾 Save failed: %s", e)
+        raise HTTPException(status_code=500, detail=f"Save failed: {e}")
 
     # Invalidate RAG
     try:

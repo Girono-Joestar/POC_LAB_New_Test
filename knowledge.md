@@ -35,6 +35,8 @@ The Metrology and Quality Control Lab at MES College of Engineering, Pune, focus
 - **File:** `public/admin_5502.html`
 - **Features:** 
   - Dynamic form for adding/editing experiments.
+  - **Thumbnail URL** field for experiment card images.
+  - **Image URLs** for carousel management.
   - Lab manager for multi-lab setup.
   - Interactive API key management.
   - Server-side audio generation trigger using `gTTS`.
@@ -50,5 +52,6 @@ The Metrology and Quality Control Lab at MES College of Engineering, Pune, focus
 
 ## 4. Maintenance
 - **Adding Experiments:** Use the Admin Panel or edit `data/exps.json`.
+- **Thumbnail Images:** Set via Admin Panel → Edit experiment → "Thumbnail URL" field. If left blank, a gradient placeholder with the experiment title is shown on cards.
 - **Audio:** After adding an experiment, run `python generate_audio.py` locally to create the MP3 narration before deploying.
 - **RAG Updates:** New files in `data/LAB/Word/` are automatically picked up on the next server restart.
