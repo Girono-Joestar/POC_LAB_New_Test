@@ -264,7 +264,7 @@ async def list_experiments(lab: Optional[str] = None):
             "apparatus": v.get("apparatus", "Untitled"),
             "short_desc": v.get("short_desc", v.get("narration_script", "")[:80]),
             "lab_id": v.get("lab_id", ""),
-            "thumbnail": v["images"][0] if v.get("images") else None,
+            "thumbnail": v.get("thumbnail") or (v["images"][0] if v.get("images") else ""),
         })
     logger.info("📋 Listing experiments — %d found (lab_filter=%s)", len(result), lab)
     return result
@@ -447,6 +447,7 @@ async def admin_add_experiment(lab_id: str, req: ExpCreateRequest):
     exp_data = dict(req.data)
     exp_data["lab_id"] = lab_id
     exp_data.setdefault("audio_loc", f"audio/{req.exp_id}.mp3")
+    exp_data.setdefault("thumbnail", "")
     exp_data.setdefault("images", [])
 
     exps[req.exp_id] = exp_data
