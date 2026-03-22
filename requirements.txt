@@ -3,6 +3,8 @@ uvicorn
 python-dotenv
 pydantic
 langchain>=0.3.0,<0.4.0
+langchain-core>=0.3.0,<0.4.0
+langchain-text-splitters>=0.3.0,<0.4.0
 langchain-nvidia-ai-endpoints
 langchain-community>=0.3.0,<0.4.0
 faiss-cpu

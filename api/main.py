@@ -586,6 +586,17 @@ async def admin_update(req: AdminUpdateRequest):
 
 # ---------------------------------------------------------------------------
 # Static mounting (only for local dev)
-# This will catch everything else not handled by @app.get/post/etc.
+# Vercel handles static files via vercel.json — mounting here would crash the
+# serverless function because StaticFiles validates the directory at import time
+# and the path resolution differs in the Lambda environment.
 # ---------------------------------------------------------------------------
-app.mount("/", StaticFiles(directory=os.path.join(ROOT_DIR, "public"), html=True), name="public")
+if not os.getenv("VERCEL"):
+    try:
+        _static_dir = os.path.join(ROOT_DIR, "public")
+        if os.path.isdir(_static_dir):
+            app.mount("/", StaticFiles(directory=_static_dir, html=True), name="public")
+            logger.info("📂 Mounted StaticFiles from %s (local dev mode)", _static_dir)
+        else:
+            logger.warning("📂 Static dir not found: %s — skipping mount", _static_dir)
+    except Exception as _e:
+        logger.warning("📂 Could not mount StaticFiles: %s — skipping", _e)
