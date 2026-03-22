@@ -59,10 +59,11 @@ def _write_json(path: str, data):
         with open(path, "w", encoding="utf-8") as fh:
             json.dump(data, fh, indent=4, ensure_ascii=False)
         logger.info("💾 Wrote %s (%d bytes)", path, os.path.getsize(path))
-    except PermissionError:
-        logger.error("🔒 Permission denied: %s — filesystem may be read-only (Vercel?)", path)
-        raise
-    except Exception as e:
+    except (PermissionError, OSError) as e:
+        import errno
+        if isinstance(e, PermissionError) or (isinstance(e, OSError) and e.errno == errno.EROFS):
+            logger.error("🔒 Read-only filesystem detected: %s (Vercel?)", path)
+            raise PermissionError(f"Read-only file system: {path}") from e
         logger.error("💾 Write failed: %s: %s", path, e)
         raise
 
@@ -89,6 +90,18 @@ def load_labs() -> dict:
 
 def save_labs(data: dict):
     _write_json(LABS_PATH, data)
+
+
+def handle_save_error(e: Exception):
+    import errno
+    is_ro = isinstance(e, PermissionError) or (isinstance(e, OSError) and getattr(e, "errno", None) == errno.EROFS)
+    if is_ro:
+        raise HTTPException(
+            status_code=501,
+            detail="Filesystem is read-only (Vercel?). To save changes, run the admin panel locally, update the JSON files, and redeploy."
+        )
+    logger.error("💾 Save failed: %s", e)
+    raise HTTPException(status_code=500, detail=f"Save failed: {e}")
 
 
 def get_api_key(lab_id: str = None) -> Optional[str]:
@@ -354,18 +367,21 @@ async def admin_update_settings(req: SettingsUpdateRequest):
     if req.secret_token != _admin_token():
         raise HTTPException(status_code=403, detail="Unauthorized")
     settings = load_settings()
-    if req.universal_api_key is not None:
-        settings["universal_api_key"] = req.universal_api_key
-        settings["NVIDIA_API_KEY"] = req.universal_api_key  # keep legacy field in sync
-        settings["GEMINI_API_KEY"] = req.universal_api_key 
-    save_settings(settings)
+    try:
+        if req.universal_api_key is not None:
+            settings["universal_api_key"] = req.universal_api_key
+            settings["NVIDIA_API_KEY"] = req.universal_api_key  # keep legacy field in sync
+            settings["GEMINI_API_KEY"] = req.universal_api_key 
+        save_settings(settings)
 
-    if req.per_lab_keys:
-        labs = load_labs()
-        for lab_id, key in req.per_lab_keys.items():
-            if lab_id in labs:
-                labs[lab_id]["api_key_override"] = key
-        save_labs(labs)
+        if req.per_lab_keys:
+            labs = load_labs()
+            for lab_id, key in req.per_lab_keys.items():
+                if lab_id in labs:
+                    labs[lab_id]["api_key_override"] = key
+            save_labs(labs)
+    except Exception as e:
+        handle_save_error(e)
 
     return {"status": "success"}
 
@@ -394,7 +410,10 @@ async def admin_create_lab(req: LabCreateRequest):
         "use_universal_key": req.use_universal_key,
         "exp_ids": [],
     }
-    save_labs(labs)
+    try:
+        save_labs(labs)
+    except Exception as e:
+        handle_save_error(e)
     logger.info("✅ Created lab: %s", req.lab_id)
     return {"status": "created", "lab_id": req.lab_id}
 
@@ -407,7 +426,10 @@ async def admin_delete_lab(lab_id: str, token: str):
     if lab_id not in labs:
         raise HTTPException(status_code=404, detail="Lab not found")
     del labs[lab_id]
-    save_labs(labs)
+    try:
+        save_labs(labs)
+    except Exception as e:
+        handle_save_error(e)
     logger.info("🗑️ Deleted lab: %s", lab_id)
     return {"status": "deleted", "lab_id": lab_id}
 
@@ -425,7 +447,10 @@ async def admin_update_lab(lab_id: str, req: LabCreateRequest):
         "api_key_override": req.api_key_override,
         "use_universal_key": req.use_universal_key,
     })
-    save_labs(labs)
+    try:
+        save_labs(labs)
+    except Exception as e:
+        handle_save_error(e)
     return {"status": "updated", "lab_id": lab_id}
 
 
@@ -452,13 +477,16 @@ async def admin_add_experiment(lab_id: str, req: ExpCreateRequest):
 
     exps[req.exp_id] = exp_data
 
-    # Register in lab
-    if lab_id in labs:
-        if req.exp_id not in labs[lab_id]["exp_ids"]:
-            labs[lab_id]["exp_ids"].append(req.exp_id)
-        save_labs(labs)
+    try:
+        # Register in lab
+        if lab_id in labs:
+            if req.exp_id not in labs[lab_id]["exp_ids"]:
+                labs[lab_id]["exp_ids"].append(req.exp_id)
+            save_labs(labs)
 
-    save_exps(exps)
+        save_exps(exps)
+    except Exception as e:
+        handle_save_error(e)
 
     # Invalidate RAG cache so next chat picks up new experiment
     try:
@@ -484,12 +512,8 @@ async def admin_update_experiment(exp_id: str, req: ExpUpdateRequest):
 
     try:
         save_exps(exps)
-    except PermissionError:
-        raise HTTPException(status_code=501,
-            detail="Filesystem is read-only (Vercel?). Run admin locally.")
     except Exception as e:
-        logger.error("💾 Save failed: %s", e)
-        raise HTTPException(status_code=500, detail=f"Save failed: {e}")
+        handle_save_error(e)
 
     # Invalidate RAG
     try:
@@ -512,14 +536,17 @@ async def admin_delete_experiment(exp_id: str, token: str):
 
     lab_id = exps[exp_id].get("lab_id")
     del exps[exp_id]
-    save_exps(exps)
+    try:
+        save_exps(exps)
 
-    # Remove from labs.json
-    if lab_id:
-        labs = load_labs()
-        if lab_id in labs and exp_id in labs[lab_id].get("exp_ids", []):
-            labs[lab_id]["exp_ids"].remove(exp_id)
-            save_labs(labs)
+        # Remove from labs.json
+        if lab_id:
+            labs = load_labs()
+            if lab_id in labs and exp_id in labs[lab_id].get("exp_ids", []):
+                labs[lab_id]["exp_ids"].remove(exp_id)
+                save_labs(labs)
+    except Exception as e:
+        handle_save_error(e)
 
     # Invalidate RAG
     try:
@@ -553,10 +580,8 @@ async def admin_generate_audio(exp_id: str, token: str):
         with open(test, "w") as f:
             f.write("test")
         os.remove(test)
-    except PermissionError:
-        raise HTTPException(status_code=501,
-            detail="Audio generation is not available on the deployed server (filesystem is read-only). "
-                   "Run generate_audio.py locally and redeploy.")
+    except Exception as e:
+        handle_save_error(e)
 
     try:
         from gtts import gTTS
@@ -584,12 +609,15 @@ async def admin_generate_audio(exp_id: str, token: str):
 async def admin_update(req: AdminUpdateRequest):
     if req.secret_token != _admin_token():
         raise HTTPException(status_code=403, detail="Unauthorized")
-    save_exps(req.data)
-    if req.api_key is not None:
-        settings = load_settings()
-        settings["GEMINI_API_KEY"] = req.api_key
-        settings["universal_api_key"] = req.api_key
-        save_settings(settings)
+    try:
+        save_exps(req.data)
+        if req.api_key is not None:
+            settings = load_settings()
+            settings["GEMINI_API_KEY"] = req.api_key
+            settings["universal_api_key"] = req.api_key
+            save_settings(settings)
+    except Exception as e:
+        handle_save_error(e)
     logger.info("✅ Legacy admin update completed — %d experiments", len(req.data))
     return {"status": "success"}
 

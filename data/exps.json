@@ -3,7 +3,7 @@
         "lab_id": "MQC",
         "apparatus": "Linear Measurement Instruments — Vernier, Digital Vernier & Micrometer",
         "short_desc": "Measure component dimensions using three precision instruments and analyse their accuracy levels.",
-        "thumbnail": "",
+        "thumbnail": "https://cdn.pixabay.com/photo/2014/09/19/19/55/vernier-caliper-452987_1280.jpg",
         "narration_script": "Welcome to Experiment 1 of the Metrology and Quality Control Lab — Linear Measurement.\n\nIn precision engineering, knowing the exact dimensions of a component is the foundation of quality. This experiment introduces you to three fundamental hand tools: the Vernier Calliper, the Digital Vernier Calliper, and the Micrometer Screw Gauge. Each of these instruments works on a different principle, yet they all serve the same goal — measuring linear dimensions with high accuracy.\n\nThe Vernier Calliper uses the concept of two scales of slightly different sizes. By identifying which division on the Vernier scale lines up with a division on the main scale, we can read down to 0.02 millimetres. The Digital Vernier works on the same physical principle but displays the reading directly with a least count of 0.01 mm — eliminating human reading error.\n\nThe Micrometer Screw Gauge relies on a precision screw and nut mechanism. One full rotation of the thimble advances the spindle by 0.5 mm — the pitch. Since the thimble has 50 divisions, each division represents 0.5 divided by 50, which equals 0.01 millimetres.\n\nIn this experiment, you will take three readings from different positions on a test specimen with each instrument, compute the average, and compare the results across instruments. This comparison helps you appreciate which tool is most appropriate for a given measurement task. Always check for zero error before measuring, apply consistent, light pressure, and never force the jaws shut.",
         "objectives": [
             "Understand the operating principle of Vernier, Digital Vernier, and Micrometer instruments",
@@ -61,8 +61,7 @@
             "Reading (Micrometer) = Barrel + (LC × Thimble) − Zero Error"
         ],
         "images": [
-            "https://images.unsplash.com/photo-1581092335878-2d9ff86ca2bf?w=600&q=80",
-            "https://images.unsplash.com/photo-1565177508283-9943c41a9a01?w=600&q=80"
+            "https://cdn.pixabay.com/photo/2014/09/19/19/55/vernier-caliper-452987_1280.jpg",
         ],
         "audio_loc": "audio/MQC-01.mp3",
         "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-01"
@@ -71,7 +70,7 @@
         "lab_id": "MQC",
         "apparatus": "Dial Gauge Calibration Setup — Slip Gauges & Calibration Tester",
         "short_desc": "Calibrate a dial gauge using precision slip gauges to verify accuracy and find worn-out zones.",
-        "thumbnail": "",
+        "thumbnail": "https://toolsplanet.in/products/baker-ko8a-dial-gauge-plunger-type-0-01-mm-l-c-25-mm-range-graduation-0-100-56-mm-bezel-dia",
         "narration_script": "Welcome to Experiment 2 — Calibration of the Dial Gauge.\n\nA measuring instrument is only as trustworthy as its last calibration. This experiment teaches you why and how we periodically verify the accuracy of a dial gauge — one of the most widely used indicators in manufacturing and quality control.\n\nThe dial gauge works on the principle of rack and pinion: a small linear movement of the plunger is converted into a rotary movement of the pointer on the dial. With a least count of 0.01 millimetres, the dial gauge is capable of detecting very fine surface variations. However, over time, internal mechanical wear causes deviations — it may read correctly in some zones but be off in others.\n\nCalibration is performed by comparing the dial gauge reading against a known, traceable standard — in this case, Grade 0 slip gauges. Slip gauges, also called gauge blocks, are precision ground steel blocks with extremely accurate dimensions. We stack them in 0.5 mm increments from zero to ten millimetres, checking the dial gauge at each step going up and then again going down.\n\nIf the reading matches the slip gauge stack within tolerance, that zone is acceptable. Any zone with excessive deviation is flagged as a worn-out zone. If multiple zones are inaccurate, the gauge is beyond its serviceable life and must be discarded. This systematic process protects product quality by ensuring only reliable instruments are used on the shop floor.",
         "objectives": [
             "Understand the principle and importance of periodic instrument calibration",
@@ -122,8 +121,7 @@
             "Hysteresis = |Ascending Reading − Descending Reading| at the same nominal value"
         ],
         "images": [
-            "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80",
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80"
+            "https://toolsplanet.in/products/baker-ko8a-dial-gauge-plunger-type-0-01-mm-l-c-25-mm-range-graduation-0-100-56-mm-bezel-dia"
         ],
         "audio_loc": "audio/MQC-02.mp3",
         "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-02"
@@ -132,7 +130,7 @@
         "lab_id": "MQC",
         "apparatus": "Floating Carriage Micrometer — Thread Parameter Measurement",
         "short_desc": "Measure major and effective diameters of a screw thread plug gauge using wire methods.",
-        "thumbnail": "",
+        "thumbnail": "https://3.imimg.com/data3/JG/RV/MY-9450050/floating-carriage-diameter-measuring-machine.gif",
         "narration_script": "Welcome to Experiment 3 — Thread Parameter Measurement using the Floating Carriage Micrometer.\n\nScrew threads are everywhere in mechanical assemblies — they transmit power, fasten components, and create precise adjustable fits. But a thread is a complex three-dimensional form defined by several parameters. To ensure two threaded parts will fit correctly, we need to measure those parameters with great accuracy.\n\nThis experiment focuses on two critical dimensions: the Major Diameter — the largest diameter of the thread profile — and the Effective Diameter, also called the Pitch Diameter — the imaginary cylinder at which the width of the thread and the width of the space are equal. Errors in the effective diameter directly cause assembly problems — either the parts won't fit, or they will be too loose.\n\nThe Floating Carriage Micrometer is a specialist bench instrument with a carriage that floats on air bearings or slides, allowing the micrometer to self-align with the thread axis. This eliminates misalignment errors that would occur with a hand-held micrometer.\n\nWe use wire methods — placing precision wires of known diameter in the thread grooves — to convert an indirect measurement of the wire geometry into a calculation of the effective diameter. The Three Wire Method is the most accurate, and the Best Wire Size is the diameter that contacts the thread exactly at the pitch line, giving a direct reading of the effective diameter.",
         "objectives": [
             "Study the construction and operation of the Floating Carriage Micrometer",
@@ -184,8 +182,7 @@
             "Three Wire: E = M − [W(1 + cosec θ) − (p/2) cot θ]"
         ],
         "images": [
-            "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80",
-            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80"
+            "https://3.imimg.com/data3/JG/RV/MY-9450050/floating-carriage-diameter-measuring-machine.gif"
         ],
         "audio_loc": "audio/MQC-03.mp3",
         "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-03"
@@ -194,7 +191,7 @@
         "lab_id": "MQC",
         "apparatus": "Profile Projector & Tool Maker's Microscope",
         "short_desc": "Inspect and measure small component profiles using magnified optical projection and microscopy.",
-        "thumbnail": "",
+        "thumbnail": "https://cpimg.tistatic.com/3641571/s/4/toolmakers-microscope-profile-projector.jpg",
         "narration_script": "Welcome to Experiment 4 — Optical Inspection using the Profile Projector and Tool Maker's Microscope.\n\nSome components are simply too small or too intricate to be measured reliably by direct contact instruments. Optical inspection methods project a magnified shadow or image of the workpiece, letting us compare shapes, measure angles, and determine dimensions non-destructively.\n\nThe Profile Projector uses a light source and projection lens system to cast an enlarged silhouette of the component onto a frosted screen — often at 10×, 20×, or 50× magnification. You can then overlay a precision scale drawing on the screen and directly read off deviations from the intended profile. This is particularly valuable for checking complex shapes like gear teeth, cams, and cutting tool profiles.\n\nThe Tool Maker's Microscope is a more direct measurement instrument. The workpiece is placed on a precision glass table that can be traversed in two perpendicular directions by calibrated micrometer drums. By focusing the microscope on specific features — edges, thread flanks, or gear tooth faces — and moving the table between two measurement points, you can determine exact dimensions with a least count down to 1 micrometre.\n\nBoth instruments are non-contact, which means they are ideal for fragile or shiny surfaces where stylus contact might cause damage or distortion. In this experiment, you will use both instruments to measure a test component and compare the results with its design dimensions.",
         "objectives": [
             "Understand the optical principles of the Profile Projector and Tool Maker's Microscope",
@@ -242,8 +239,7 @@
             "Magnification = Image Size on Screen / Actual Object Size"
         ],
         "images": [
-            "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&q=80",
-            "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80"
+            "https://cpimg.tistatic.com/3641571/s/4/toolmakers-microscope-profile-projector.jpg"
         ],
         "audio_loc": "audio/MQC-04.mp3",
         "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-04"
@@ -252,7 +248,7 @@
         "lab_id": "MQC",
         "apparatus": "Surface Roughness Measurement — Optical Flat & Stylus Tester",
         "short_desc": "Analyse surface texture using light interference fringe patterns and a diamond-stylus roughness tester.",
-        "thumbnail": "",
+        "thumbnail": "https://cpimg.tistatic.com/3199183/s/4/surface-roughness-testers.jpg",
         "narration_script": "Welcome to Experiment 5 — Surface Roughness Measurement.\n\nEvery machined surface, no matter how smooth it appears to the naked eye, has microscopic peaks and valleys — the fingerprint of the manufacturing process that created it. The pattern and height of these irregularities, collectively called surface roughness or surface texture, profoundly influence how a component performs in service. Rough surfaces wear faster, generate more friction and heat, trap corrosion, and fail under fatigue loading sooner than smooth surfaces.\n\nThis experiment introduces you to two complementary methods of surface texture analysis.\n\nPart A uses the Optical Flat — a precisely flat, glass disc with a flatness tolerance measured in fractions of a wavelength of light. When placed on a polished workpiece surface, it creates a microscopic air wedge. Monochromatic sodium vapour light illuminating this air wedge produces interference fringes — alternating bright and dark bands. Perfectly straight and evenly-spaced fringes indicate a flat surface. Curved or irregularly-spaced fringes reveal surface undulations. This method is qualitative but extremely sensitive.\n\nPart B uses the Electronic Stylus Tester — a finely pointed diamond stylus that is drawn across the surface at a constant speed. The stylus rides over the peaks and dips into the valleys. Its vertical motion is amplified electronically and processed to give numerical roughness parameters. The most common parameter is Ra, the Centre Line Average — the arithmetic mean of all surface deviations from a reference line over the measurement length.",
         "objectives": [
             "Study the principle and construction of an Optical Flat",
@@ -303,8 +299,7 @@
             "For sinusoidal profiles: Rq ≈ 1.11 × Ra"
         ],
         "images": [
-            "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
-            "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=600&q=80"
+            "https://cpimg.tistatic.com/3199183/s/4/surface-roughness-testers.jpg"
         ],
         "audio_loc": "audio/MQC-05.mp3",
         "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-05"
@@ -313,7 +308,7 @@
         "lab_id": "MQC",
         "apparatus": "Gear Tooth Vernier & Sine Bar — Gear and Angular Measurement",
         "short_desc": "Measure gear tooth thickness at the pitch circle and determine unknown angles using a precision sine bar.",
-        "thumbnail": "",
+        "thumbnail": "https://electricalworkbook.com/wp-content/uploads/2023/05/What-is-Gear-Tooth-Vernier-Caliper-Working-Principle-Construction-Diagram-Measurement-Procedure.png",
         "narration_script": "Welcome to Experiment 7 — Gear and Angular Measurement using the Gear Tooth Vernier and Sine Bar.\n\nGears are among the most important power-transmitting elements in mechanical systems. For gears to mesh correctly — transmitting power smoothly and without noise — each tooth must have the correct thickness at the pitch circle, and the pitch circle diameter must match the theoretical value. Errors in these dimensions cause incorrect backlash, noise, vibration, premature wear, and in worst cases, tooth breakage.\n\nIn the first part of this experiment, we use a Gear Tooth Vernier Calliper — a specially designed instrument with two independent measuring systems: horizontal jaws that measure tooth thickness, and a vertical tongue that sets the depth on the tooth face to ensure measurement is taken exactly at the pitch circle, not above or below it.\n\nIn the second part, we study angular measurement with the Sine Bar — a beautifully simple yet powerful precision tool. A sine bar is a hardened steel bar with two precision ground cylinders at each end, exactly 100 mm or 200 mm apart. By raising one roller on a stack of slip gauges, the bar tilts to a precise angle. Since we know the sine bar length (the hypotenuse) and we control the height (the opposite side), the angle is determined simply from trigonometry: sin(angle) = height / length. This method achieves angular accuracy of a few arc-seconds — far better than any graduated protractor.",
         "objectives": [
             "Measure gear tooth thickness at the pitch circle using the Gear Tooth Vernier Calliper",
@@ -374,8 +369,7 @@
             "Angular Error: δθ = arctan(dial variation / traverse distance)"
         ],
         "images": [
-            "https://images.unsplash.com/photo-1565098772267-60af42b81ef2?w=600&q=80",
-            "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80"
+            "https://electricalworkbook.com/wp-content/uploads/2023/05/What-is-Gear-Tooth-Vernier-Caliper-Working-Principle-Construction-Diagram-Measurement-Procedure.png"
         ],
         "audio_loc": "audio/MQC-07.mp3",
         "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-07"
