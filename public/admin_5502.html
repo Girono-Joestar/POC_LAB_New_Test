@@ -1,375 +1,952 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>System Panel</title>
-
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto+Mono:wght@400&display=swap"
-        rel="stylesheet">
+    <title>Lab Admin Panel</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
     <style>
-        /* ---- Admin-specific overrides ---- */
-        .admin-wrapper {
-            max-width: 960px;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
+        :root {
+            --admin-sidebar-w: 220px;
+            --admin-accent: var(--md-sys-color-primary);
         }
+        *, *::after, *::before { box-sizing: border-box; }
+        body { font-family: 'Google Sans', sans-serif; background: var(--md-sys-color-background); color: var(--md-sys-color-on-surface); margin: 0; }
 
+        /* ── Login ─────────────────────────────────── */
         .admin-login {
-            max-width: 400px;
-            margin: 6rem auto;
+            max-width: 400px; margin: 7rem auto; padding: 2.5rem 2rem;
             background: var(--md-sys-color-surface-container);
-            padding: 2.5rem;
-            border-radius: var(--md-sys-shape-corner-xl);
-            border: 1px solid var(--md-sys-color-outline-variant);
-            text-align: center;
-            animation: slideUp 0.4s ease both;
+            border-radius: 24px; border: 1px solid var(--md-sys-color-outline-variant);
+            text-align: center; animation: slideInUp 0.4s ease both;
         }
+        .admin-login .login-icon { font-size: 3rem; color: var(--admin-accent); }
+        .admin-login h2 { margin: 0.75rem 0 1.5rem; }
 
-        .admin-login h2 {
-            margin-bottom: 1.5rem;
+        /* ── Admin shell ─────────────────────────────── */
+        .admin-shell { display: flex; min-height: 100vh; }
+        .admin-sidebar {
+            width: var(--admin-sidebar-w); min-height: 100vh; padding: 1.5rem 0;
+            background: var(--md-sys-color-surface-container);
+            border-right: 1px solid var(--md-sys-color-outline-variant);
+            position: sticky; top: 0; display: flex; flex-direction: column; gap: 0;
         }
-
-        .field {
-            margin-bottom: 1.25rem;
-            text-align: left;
+        .sidebar-brand { padding: 0.5rem 1.25rem 1.25rem; border-bottom: 1px solid var(--md-sys-color-outline-variant); margin-bottom: 0.5rem; }
+        .sidebar-brand h1 { font-size: 1rem; font-weight: 600; margin: 0; }
+        .sidebar-brand p { font-size: 0.72rem; color: var(--md-sys-color-on-surface-variant); margin: 0; }
+        .sidebar-nav-label { font-size: 0.7rem; font-weight: 600; letter-spacing: .08em; color: var(--md-sys-color-on-surface-variant); text-transform: uppercase; padding: 0.75rem 1.25rem 0.25rem; }
+        .sidebar-btn {
+            display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 1.25rem;
+            cursor: pointer; border: none; background: none; color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.9rem; font-family: 'Google Sans', sans-serif; width: 100%; text-align: left;
+            border-radius: 0; transition: background .15s, color .15s;
         }
+        .sidebar-btn:hover { background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface); }
+        .sidebar-btn.active { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); font-weight: 600; }
+        .sidebar-btn .material-symbols-outlined { font-size: 1.1rem; }
+        .sidebar-spacer { flex: 1; }
+        .sidebar-logout { border-top: 1px solid var(--md-sys-color-outline-variant); margin-top: 0.5rem; }
 
-        .field label {
-            display: block;
-            margin-bottom: 0.4rem;
-            font-size: 0.85rem;
-            color: var(--md-sys-color-on-surface-variant);
-        }
+        /* ── Main content area ───────────────────────── */
+        .admin-main { flex: 1; padding: 2rem 2.5rem; max-width: 960px; }
+        .admin-page { display: none; }
+        .admin-page.active { display: block; }
+        .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.75rem; }
+        .page-header h2 { font-size: 1.4rem; font-weight: 700; margin: 0; }
 
-        .field input,
-        .field textarea {
-            width: 100%;
-            background: var(--md-sys-color-surface-container-high);
-            border: 1px solid var(--md-sys-color-outline-variant);
-            color: var(--md-sys-color-on-surface);
-            padding: 0.7rem 1rem;
-            border-radius: var(--md-sys-shape-corner-m);
-            font-size: 0.9rem;
-            outline: none;
-            transition: border-color var(--md-sys-motion-standard);
-        }
-
-        .field input:focus,
-        .field textarea:focus {
-            border-color: var(--md-sys-color-primary);
-        }
-
-        .btn-filled {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            background: var(--md-sys-color-primary);
-            color: var(--md-sys-color-on-primary);
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: var(--md-sys-shape-corner-full);
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: box-shadow var(--md-sys-motion-standard);
-        }
-
-        .btn-filled:hover {
-            box-shadow: var(--md-sys-elevation-2);
-        }
-
-        .btn-tonal {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--md-sys-color-secondary-container);
-            color: var(--md-sys-color-on-secondary);
-            border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: var(--md-sys-shape-corner-full);
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
-        .admin-panel {
-            animation: slideUp 0.4s ease both;
-        }
-
+        /* ── Cards & Form elements ───────────────────── */
         .section-card {
             background: var(--md-sys-color-surface-container);
             border: 1px solid var(--md-sys-color-outline-variant);
-            border-radius: var(--md-sys-shape-corner-xl);
-            padding: 1.5rem 2rem;
-            margin-bottom: 1.5rem;
+            border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem;
         }
-
-        .section-card h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .section-card h3 { display: flex; align-items: center; gap: 0.4rem; font-size: 1rem; margin: 0 0 1rem; color: var(--md-sys-color-on-surface); }
+        .field { margin-bottom: 1.1rem; }
+        .field label { display: block; font-size: 0.8rem; font-weight: 500; color: var(--md-sys-color-on-surface-variant); margin-bottom: 0.4rem; }
+        .field input, .field textarea, .field select {
+            width: 100%; background: var(--md-sys-color-surface-container-high);
+            border: 1px solid var(--md-sys-color-outline-variant); color: var(--md-sys-color-on-surface);
+            padding: 0.65rem 1rem; border-radius: 10px; font-size: 0.88rem; outline: none;
             font-family: 'Google Sans', sans-serif;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: var(--md-sys-color-on-surface);
+            transition: border-color 0.2s;
         }
+        .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--admin-accent); }
+        .field textarea { min-height: 100px; resize: vertical; }
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .field-hint { font-size: 0.72rem; color: var(--md-sys-color-on-surface-variant); margin-top: 0.3rem; }
 
-        #json-editor {
-            width: 100%;
-            min-height: 440px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.82rem;
-            line-height: 1.6;
-            resize: vertical;
+        /* ── Buttons ─────────────────────────────────── */
+        .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.25rem; border-radius: 999px; border: none; cursor: pointer; font-size: 0.87rem; font-weight: 500; font-family: 'Google Sans', sans-serif; transition: all .18s; }
+        .btn .material-symbols-outlined { font-size: 1rem; }
+        .btn-primary { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
+        .btn-primary:hover { box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+        .btn-tonal { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary); }
+        .btn-danger { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
+        .btn-ghost { background: transparent; color: var(--md-sys-color-on-surface-variant); border: 1px solid var(--md-sys-color-outline-variant); }
+        .btn-sm { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
+        .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem; }
+        .action-row { display: flex; gap: 0.5rem; align-items: center; }
+
+        /* ── Experiment Cards ────────────────────────── */
+        .exp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .exp-admin-card {
+            background: var(--md-sys-color-surface-container);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 16px; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem;
+            transition: border-color .2s;
         }
+        .exp-admin-card:hover { border-color: var(--admin-accent); }
+        .exp-card-id { font-size: 0.72rem; font-weight: 700; font-family: 'Roboto Mono', monospace; color: var(--admin-accent); text-transform: uppercase; }
+        .exp-card-title { font-size: 0.92rem; font-weight: 600; color: var(--md-sys-color-on-surface); margin: 0; }
+        .exp-card-lab { font-size: 0.78rem; color: var(--md-sys-color-on-surface-variant); }
+        .exp-card-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
 
-        .actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
+        /* ── Lab pills ─────────────────────────────── */
+        .lab-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .lab-card {
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--md-sys-color-surface-container);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 14px; padding: 1rem 1.25rem;
         }
+        .lab-card-name { font-weight: 600; font-size: 0.95rem; }
+        .lab-card-desc { font-size: 0.78rem; color: var(--md-sys-color-on-surface-variant); }
+        .lab-card-id { font-size: 0.72rem; font-family: 'Roboto Mono', monospace; color: var(--admin-accent); margin-top: 0.2rem; }
 
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--md-sys-shape-corner-full);
-            font-size: 0.85rem;
-            font-weight: 500;
-            z-index: 200;
-            animation: slideUp 0.3s ease both;
+        /* ── Slide-over form panel ──────────────────── */
+        .slide-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 100; display: none; }
+        .slide-overlay.open { display: block; }
+        .slide-panel {
+            position: fixed; top: 0; right: 0; height: 100vh; width: min(540px, 100vw);
+            background: var(--md-sys-color-surface); overflow-y: auto;
+            border-left: 1px solid var(--md-sys-color-outline-variant);
+            transform: translateX(100%); transition: transform 0.3s ease; z-index: 101; padding: 2rem;
         }
+        .slide-panel.open { transform: translateX(0); }
+        .slide-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+        .slide-panel-header h3 { font-size: 1.1rem; font-weight: 700; margin: 0; }
 
-        .toast--success {
-            background: #2e7d32;
-            color: #fff;
-        }
+        /* Dynamic list items (objectives, steps, etc.) */
+        .dynamic-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .dynamic-item { display: flex; gap: 0.4rem; align-items: flex-start; }
+        .dynamic-item input { flex: 1; }
+        .dynamic-item .remove-btn { background: none; border: none; color: var(--md-sys-color-error); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0.4rem; }
+        .add-item-btn { background: none; border: 1px dashed var(--md-sys-color-outline-variant); border-radius: 8px; padding: 0.4rem 0.75rem; color: var(--admin-accent); cursor: pointer; font-size: 0.82rem; margin-top: 0.25rem; width: 100%; display: flex; align-items: center; gap: 0.3rem; justify-content: center; }
 
-        .toast--error {
-            background: var(--md-sys-color-error);
-            color: var(--md-sys-color-on-error);
-        }
+        /* ── Audio preview ──────────────────────────── */
+        .audio-preview { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
+        .audio-preview audio { flex: 1; height: 36px; }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-            }
+        /* ── Toggle switch ──────────────────────────── */
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; }
+        .toggle { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .toggle input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider { position: absolute; inset: 0; background: var(--md-sys-color-outline-variant); border-radius: 999px; cursor: pointer; transition: .2s; }
+        .toggle input:checked + .toggle-slider { background: var(--admin-accent); }
+        .toggle-slider::before { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: .2s; }
+        .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
 
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
+        /* ── Notice ─────────────────────────────────── */
+        .notice { display: flex; align-items: flex-start; gap: 0.6rem; background: var(--md-sys-color-secondary-container); border-radius: 12px; padding: 0.85rem 1rem; font-size: 0.82rem; color: var(--md-sys-color-on-secondary-container); margin-bottom: 1.25rem; }
+        .notice .material-symbols-outlined { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+        /* ── Toast ──────────────────────────────────── */
+        .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); padding: 0.7rem 1.4rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500; z-index: 200; animation: slideInUp 0.3s ease; white-space: nowrap; }
+        .toast--success { background: #1e531e; color: #fff; }
+        .toast--error { background: var(--md-sys-color-error); color: #fff; }
+        .toast--info { background: var(--md-sys-color-inverse-surface); color: var(--md-sys-color-inverse-on-surface); }
+
+        /* ── Word count badge ─────────────────────── */
+        .word-count { font-size: 0.72rem; color: var(--md-sys-color-on-surface-variant); text-align: right; margin-top: 0.2rem; }
+
+        /* ── Confirm dialog ─────────────────────── */
+        .confirm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 300; display: none; align-items: center; justify-content: center; }
+        .confirm-overlay.open { display: flex; }
+        .confirm-box { background: var(--md-sys-color-surface-container); border-radius: 20px; padding: 2rem; max-width: 380px; width: 90%; text-align: center; }
+        .confirm-box h4 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+        .confirm-box p { font-size: 0.88rem; color: var(--md-sys-color-on-surface-variant); margin: 0 0 1.5rem; }
+        .confirm-box .actions { justify-content: center; }
+
+        @keyframes slideInUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
     </style>
 </head>
-
 <body>
 
-    <!-- LOGIN -->
-    <div id="login-section" class="admin-login">
-        <span class="material-symbols-outlined"
-            style="font-size:3rem;color:var(--md-sys-color-primary)">admin_panel_settings</span>
-        <h2 class="headline-large">Admin Access</h2>
-        <div class="field">
-            <label for="admin-token">Secret Token</label>
-            <input type="password" id="admin-token" placeholder="Enter your admin token">
+<!-- ── LOGIN ──────────────────────────────────────────────────────── -->
+<div id="login-section" class="admin-login">
+    <span class="material-symbols-outlined login-icon">admin_panel_settings</span>
+    <h2 class="headline-large" style="font-size:1.4rem">Admin Access</h2>
+    <div class="field">
+        <label for="admin-token">Secret Token</label>
+        <input type="password" id="admin-token" placeholder="Enter admin token" autocomplete="current-password">
+    </div>
+    <button onclick="doLogin()" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem">
+        <span class="material-symbols-outlined">login</span>Authenticate
+    </button>
+</div>
+
+<!-- ── ADMIN SHELL ─────────────────────────────────────────────── -->
+<div id="admin-shell" class="admin-shell hidden">
+
+    <!-- Sidebar -->
+    <nav class="admin-sidebar">
+        <div class="sidebar-brand">
+            <h1><span class="material-symbols-outlined" style="vertical-align:middle;font-size:1rem">science</span> Lab Admin</h1>
+            <p id="sb-login-info">Authenticated</p>
         </div>
-        <button onclick="doLogin()" class="btn-filled">
-            <span class="material-symbols-outlined" style="font-size:1.1rem">login</span>
-            Authenticate
+        <div class="sidebar-nav-label">Content</div>
+        <button class="sidebar-btn active" onclick="showPage('experiments')" id="nav-experiments">
+            <span class="material-symbols-outlined">biotech</span>Experiments
+        </button>
+        <button class="sidebar-btn" onclick="showPage('labs')" id="nav-labs">
+            <span class="material-symbols-outlined">domain</span>Manage Labs
+        </button>
+        <div class="sidebar-nav-label">Configuration</div>
+        <button class="sidebar-btn" onclick="showPage('settings')" id="nav-settings">
+            <span class="material-symbols-outlined">key</span>API Keys
+        </button>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-logout">
+            <button class="sidebar-btn" onclick="doLogout()">
+                <span class="material-symbols-outlined">logout</span>Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <main class="admin-main">
+
+        <!-- ─── EXPERIMENTS PAGE ─── -->
+        <div id="page-experiments" class="admin-page active">
+            <div class="page-header">
+                <div>
+                    <h2>Experiments</h2>
+                    <p id="exp-filter-label" style="font-size:0.82rem;color:var(--md-sys-color-on-surface-variant);margin:0"></p>
+                </div>
+                <div class="action-row">
+                    <select id="lab-filter" class="field" style="margin:0;min-width:160px;padding:0.5rem 0.75rem;font-size:0.85rem;" onchange="filterByLab()">
+                        <option value="">All Labs</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="openAddExp()">
+                        <span class="material-symbols-outlined">add</span>Add Experiment
+                    </button>
+                </div>
+            </div>
+            <div class="notice">
+                <span class="material-symbols-outlined">info</span>
+                <span>This is a <strong>local administration panel</strong>. Changes are saved to the server's JSON files.
+                On Vercel, the filesystem is read-only — run the admin panel locally or via ngrok.
+                After adding experiments, run <code>generate_audio.py</code> and redeploy.</span>
+            </div>
+            <div id="exp-grid" class="exp-grid"></div>
+        </div>
+
+        <!-- ─── LABS PAGE ─── -->
+        <div id="page-labs" class="admin-page">
+            <div class="page-header">
+                <h2>Manage Labs</h2>
+                <button class="btn btn-primary" onclick="openAddLab()">
+                    <span class="material-symbols-outlined">add</span>New Lab
+                </button>
+            </div>
+            <div id="labs-list" class="lab-list"></div>
+        </div>
+
+        <!-- ─── SETTINGS PAGE ─── -->
+        <div id="page-settings" class="admin-page">
+            <div class="page-header"><h2>API Key Configuration</h2></div>
+            <div class="section-card">
+                <h3><span class="material-symbols-outlined">public</span>Universal API Key</h3>
+                <p style="font-size:0.83rem;color:var(--md-sys-color-on-surface-variant);margin:0 0 1rem">Used for all labs unless a lab has its own override key below.</p>
+                <div class="field">
+                    <label for="universal-key">Google Gemini API Key</label>
+                    <input type="password" id="universal-key" placeholder="AIza…" autocomplete="off">
+                </div>
+                <button class="btn btn-primary" onclick="saveUniversalKey()">
+                    <span class="material-symbols-outlined">save</span>Save Universal Key
+                </button>
+            </div>
+            <div class="section-card">
+                <h3><span class="material-symbols-outlined">lab_profile</span>Per-Lab Key Overrides</h3>
+                <p style="font-size:0.83rem;color:var(--md-sys-color-on-surface-variant);margin:0 0 1rem">Set a different Gemini API key for a specific lab. Leave blank to use the universal key.</p>
+                <div id="per-lab-keys"></div>
+                <button class="btn btn-primary" onclick="savePerLabKeys()" style="margin-top:1rem">
+                    <span class="material-symbols-outlined">save</span>Save Lab Keys
+                </button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ── SLIDE PANEL (Add / Edit Experiment) ──────────────────────── -->
+<div id="slide-overlay" class="slide-overlay" onclick="closeSlide()"></div>
+<div id="slide-panel" class="slide-panel">
+    <div class="slide-panel-header">
+        <h3 id="slide-title">Add Experiment</h3>
+        <button class="btn btn-ghost btn-sm" onclick="closeSlide()">
+            <span class="material-symbols-outlined">close</span>
         </button>
     </div>
 
-    <!-- ADMIN PANEL -->
-    <div id="admin-section" class="admin-wrapper hidden">
-        <div class="admin-panel">
-            <h2 class="headline-large" style="margin-bottom:1.5rem;">
-                <span class="material-symbols-outlined"
-                    style="vertical-align:middle;margin-right:0.5rem;">dashboard_customize</span>
-                Admin Dashboard
-            </h2>
-
-            <!-- Settings Card -->
-            <div class="section-card">
-                <h3><span class="material-symbols-outlined">key</span> Global Settings</h3>
-                <div class="field">
-                    <label for="admin-api-key">Gemini API Key</label>
-                    <input type="text" id="admin-api-key" placeholder="AIza…">
-                </div>
-            </div>
-
-            <!-- JSON Editor Card -->
-            <div class="section-card">
-                <h3><span class="material-symbols-outlined">data_object</span> Experiment Data (JSON)</h3>
-                <textarea id="json-editor"></textarea>
-            </div>
-
-            <!-- Actions -->
-            <div class="actions">
-                <button onclick="saveAll()" class="btn-filled">
-                    <span class="material-symbols-outlined" style="font-size:1.1rem">save</span>
-                    Save All Changes
-                </button>
-                <button onclick="formatJSON()" class="btn-tonal">
-                    <span class="material-symbols-outlined" style="font-size:1.1rem">format_align_left</span>
-                    Format JSON
-                </button>
-            </div>
+    <div class="field-row">
+        <div class="field">
+            <label for="f-exp-id">Experiment ID *</label>
+            <input type="text" id="f-exp-id" placeholder="e.g. MQC-08" style="font-family:'Roboto Mono',monospace">
+            <div class="field-hint">Unique identifier, no spaces</div>
+        </div>
+        <div class="field">
+            <label for="f-lab-id">Lab *</label>
+            <select id="f-lab-id"></select>
         </div>
     </div>
 
-    <script>
-        // ---- Logging Utility ----
-        const ALOG = '[ADMIN]';
-        const alog = {
-            info: (...a) => console.log(`${ALOG} ℹ️`, new Date().toISOString(), ...a),
-            warn: (...a) => console.warn(`${ALOG} ⚠️`, new Date().toISOString(), ...a),
-            error: (...a) => console.error(`${ALOG} ❌`, new Date().toISOString(), ...a),
-            net: (...a) => console.log(`${ALOG} 🌐`, new Date().toISOString(), ...a),
-        };
+    <div class="field">
+        <label for="f-apparatus">Apparatus / Title *</label>
+        <input type="text" id="f-apparatus" placeholder="e.g. Vernier Caliper & Micrometer Study">
+    </div>
 
-        alog.info('Admin portal loaded');
+    <div class="field">
+        <label for="f-short-desc">Short Description (shown on cards)</label>
+        <input type="text" id="f-short-desc" placeholder="One sentence teaser…">
+    </div>
 
-        let adminToken = '';
+    <div class="field">
+        <label for="f-narration">Narration Script (used for audio)</label>
+        <textarea id="f-narration" style="min-height:140px" oninput="updateWordCount(this,'f-narration-wc')" placeholder="Write a rich, 3–5 paragraph narration for the audio player. Be conversational and educational, not robotic."></textarea>
+        <div class="word-count" id="f-narration-wc">0 words</div>
+    </div>
 
-        // ---- Login ----
-        async function doLogin() {
-            adminToken = document.getElementById('admin-token').value.trim();
-            if (!adminToken) { toast('Token required', 'error'); alog.warn('Login attempted with empty token'); return; }
+    <div class="field">
+        <label>Objectives</label>
+        <div id="f-objectives" class="dynamic-list"></div>
+        <button class="add-item-btn" onclick="addListItem('f-objectives','Objective…')">
+            <span class="material-symbols-outlined" style="font-size:.9rem">add</span>Add Objective
+        </button>
+    </div>
 
-            alog.info('🔐 Login attempt…');
-            const startTime = performance.now();
+    <div class="field">
+        <label for="f-theory">Theory (key concepts, separate with blank lines)</label>
+        <textarea id="f-theory" style="min-height:120px" placeholder="Principle: …&#10;&#10;Formula derivation: …"></textarea>
+    </div>
 
-            try {
-                alog.net('→ GET /api/admin/settings');
-                const sRes = await fetch(`/api/admin/settings?token=${encodeURIComponent(adminToken)}`);
-                alog.net(`← GET /api/admin/settings → ${sRes.status}`);
-                if (!sRes.ok) {
-                    alog.error('🚫 Login FAILED — invalid token (HTTP ' + sRes.status + ')');
-                    toast('Invalid token', 'error');
-                    return;
-                }
+    <div class="field">
+        <label>Procedure Steps</label>
+        <div id="f-procedure" class="dynamic-list"></div>
+        <button class="add-item-btn" onclick="addListItem('f-procedure','Step…')">
+            <span class="material-symbols-outlined" style="font-size:.9rem">add</span>Add Step
+        </button>
+    </div>
 
-                const settings = await sRes.json();
-                alog.info('✅ Authentication successful — settings loaded');
-                alog.info(`🔑 API key configured: ${settings.GEMINI_API_KEY ? 'YES (…' + settings.GEMINI_API_KEY.slice(-4) + ')' : 'NO'}`);
-                document.getElementById('admin-api-key').value = settings.GEMINI_API_KEY || '';
+    <div class="field">
+        <label>Key Points</label>
+        <div id="f-keypoints" class="dynamic-list"></div>
+        <button class="add-item-btn" onclick="addListItem('f-keypoints','Key point…')">
+            <span class="material-symbols-outlined" style="font-size:.9rem">add</span>Add Key Point
+        </button>
+    </div>
 
-                // Load experiment data
-                alog.info('📋 Loading experiment data…');
-                alog.net('→ GET /api/experiments');
-                const listRes = await fetch('/api/experiments');
-                const list = await listRes.json();
-                alog.info(`📋 Found ${list.length} experiments — fetching full details…`);
+    <div class="field">
+        <label>Formulas</label>
+        <div id="f-formulas" class="dynamic-list"></div>
+        <button class="add-item-btn" onclick="addListItem('f-formulas','Formula…')">
+            <span class="material-symbols-outlined" style="font-size:.9rem">add</span>Add Formula
+        </button>
+    </div>
 
-                const allData = {};
-                for (const item of list) {
-                    alog.net(`→ GET /api/experiments/${item.id}`);
-                    const dRes = await fetch(`/api/experiments/${item.id}`);
-                    allData[item.id] = await dRes.json();
-                    alog.info(`  ✓ ${item.id}: "${item.apparatus}"`);
-                }
+    <div class="field">
+        <label>Image URLs</label>
+        <div id="f-images" class="dynamic-list"></div>
+        <button class="add-item-btn" onclick="addListItem('f-images','https://…')">
+            <span class="material-symbols-outlined" style="font-size:.9rem">add</span>Add Image URL
+        </button>
+    </div>
 
-                const elapsed = (performance.now() - startTime).toFixed(0);
-                alog.info(`✅ All data loaded in ${elapsed}ms — ${Object.keys(allData).length} experiments`);
+    <div class="field">
+        <label for="f-audio-loc">Audio File Path</label>
+        <input type="text" id="f-audio-loc" placeholder="audio/MQC-08.mp3">
+        <div class="field-hint">Will be auto-set to audio/{exp-id}.mp3 when generating audio.</div>
+        <div class="audio-preview">
+            <audio id="f-audio-preview" controls style="width:100%;height:36px"></audio>
+            <button class="btn btn-tonal btn-sm" onclick="generateAudioForForm()">
+                <span class="material-symbols-outlined">graphic_eq</span>Generate
+            </button>
+        </div>
+    </div>
 
-                document.getElementById('json-editor').value = JSON.stringify(allData, null, 4);
-                document.getElementById('login-section').classList.add('hidden');
-                document.getElementById('admin-section').classList.remove('hidden');
-            } catch (err) {
-                alog.error('💥 Login failed with exception:', err.message, err);
-                toast('Login failed: ' + err.message, 'error');
-            }
+    <div class="field">
+        <label for="f-qr-addr">QR Code URL (optional)</label>
+        <input type="text" id="f-qr-addr" placeholder="https://your-domain/?exp=MQC-08">
+    </div>
+
+    <div class="actions">
+        <button class="btn btn-primary" onclick="saveExpForm()">
+            <span class="material-symbols-outlined">save</span>Save Experiment
+        </button>
+        <button class="btn btn-ghost" onclick="closeSlide()">Cancel</button>
+    </div>
+</div>
+
+<!-- ── SLIDE PANEL (Add Lab) ─────────────────────────────────────── -->
+<div id="lab-slide-overlay" class="slide-overlay" onclick="closeLabSlide()"></div>
+<div id="lab-slide-panel" class="slide-panel">
+    <div class="slide-panel-header">
+        <h3>Create New Lab</h3>
+        <button class="btn btn-ghost btn-sm" onclick="closeLabSlide()">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
+    <div class="field">
+        <label for="f-lab-id-new">Lab ID *</label>
+        <input type="text" id="f-lab-id-new" placeholder="e.g. HYD_LAB" style="font-family:'Roboto Mono',monospace">
+        <div class="field-hint">Uppercase, no spaces — used as key in the system</div>
+    </div>
+    <div class="field">
+        <label for="f-lab-name">Lab Name *</label>
+        <input type="text" id="f-lab-name" placeholder="e.g. Hydraulics & Fluid Mechanics Lab">
+    </div>
+    <div class="field">
+        <label for="f-lab-desc">Description</label>
+        <textarea id="f-lab-desc" style="min-height:70px" placeholder="Brief description of the lab…"></textarea>
+    </div>
+    <div class="field">
+        <div class="toggle-row">
+            <label>Use universal API key</label>
+            <label class="toggle"><input type="checkbox" id="f-lab-use-universal" checked><span class="toggle-slider"></span></label>
+        </div>
+    </div>
+    <div class="field">
+        <label for="f-lab-api">Lab-specific API key (leave blank to use universal)</label>
+        <input type="password" id="f-lab-api" placeholder="AIza…" autocomplete="off">
+    </div>
+    <div class="actions">
+        <button class="btn btn-primary" onclick="saveLabForm()">
+            <span class="material-symbols-outlined">save</span>Create Lab
+        </button>
+        <button class="btn btn-ghost" onclick="closeLabSlide()">Cancel</button>
+    </div>
+</div>
+
+<!-- ── CONFIRM DIALOG ─────────────────────────────────────────────── -->
+<div id="confirm-overlay" class="confirm-overlay">
+    <div class="confirm-box">
+        <span class="material-symbols-outlined" style="font-size:2.5rem;color:var(--md-sys-color-error)">delete_forever</span>
+        <h4 id="confirm-title">Delete Experiment?</h4>
+        <p id="confirm-body">This cannot be undone.</p>
+        <div class="actions">
+            <button class="btn btn-danger" id="confirm-ok">Delete</button>
+            <button class="btn btn-ghost" onclick="closeConfirm()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────
+// State
+// ─────────────────────────────────────────────────
+let adminToken = '';
+let allExps = {};
+let allLabs = {};
+let editingExpId = null;   // null = new, string = editing existing
+
+// ─────────────────────────────────────────────────
+// Login / Logout
+// ─────────────────────────────────────────────────
+async function doLogin() {
+    adminToken = document.getElementById('admin-token').value.trim();
+    if (!adminToken) { showToast('Token required', 'error'); return; }
+
+    try {
+        const res = await fetch(`/api/admin/settings?token=${encodeURIComponent(adminToken)}`);
+        if (!res.ok) { showToast('Invalid token', 'error'); return; }
+
+        const data = await res.json();
+        allLabs = data.labs || {};
+        document.getElementById('sb-login-info').textContent = `Labs: ${Object.keys(allLabs).length}`;
+
+        // Populate universal key
+        document.getElementById('universal-key').value = data.settings?.universal_api_key || data.settings?.GEMINI_API_KEY || '';
+
+        // Populate per-lab keys
+        renderPerLabKeys();
+        populateLabFilter();
+
+        await loadExperiments();
+
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('admin-shell').classList.remove('hidden');
+    } catch (e) {
+        showToast('Login error: ' + e.message, 'error');
+    }
+}
+
+function doLogout() {
+    adminToken = '';
+    allExps = {};
+    allLabs = {};
+    document.getElementById('admin-shell').classList.add('hidden');
+    document.getElementById('login-section').classList.remove('hidden');
+    document.getElementById('admin-token').value = '';
+}
+
+// Enter to login
+document.getElementById('admin-token').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+// ─────────────────────────────────────────────────
+// Navigation
+// ─────────────────────────────────────────────────
+function showPage(name) {
+    document.querySelectorAll('.admin-page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    document.getElementById('nav-' + name).classList.add('active');
+}
+
+// ─────────────────────────────────────────────────
+// Experiments
+// ─────────────────────────────────────────────────
+async function loadExperiments() {
+    const res = await fetch('/api/experiments');
+    const list = await res.json();
+    allExps = {};
+    for (const item of list) {
+        const full = await fetch(`/api/experiments/${item.id}`);
+        allExps[item.id] = await full.json();
+    }
+    renderExpGrid();
+}
+
+function renderExpGrid(labFilter = '') {
+    const grid = document.getElementById('exp-grid');
+    grid.innerHTML = '';
+    let count = 0;
+    for (const [id, exp] of Object.entries(allExps)) {
+        if (labFilter && exp.lab_id !== labFilter) continue;
+        count++;
+        const card = document.createElement('div');
+        card.className = 'exp-admin-card';
+        card.innerHTML = `
+            <div class="exp-card-id">${id}</div>
+            <p class="exp-card-title">${exp.apparatus || 'Untitled'}</p>
+            <p class="exp-card-lab">${exp.lab_id || ''}</p>
+            <p style="font-size:0.78rem;color:var(--md-sys-color-on-surface-variant)">${(exp.short_desc || '').substring(0,80)}...</p>
+            <div class="exp-card-actions">
+                <button class="btn btn-tonal btn-sm" onclick="openEditExp('${id}')">
+                    <span class="material-symbols-outlined">edit</span>Edit
+                </button>
+                <button class="btn btn-danger btn-sm" onclick="confirmDeleteExp('${id}')">
+                    <span class="material-symbols-outlined">delete</span>Delete
+                </button>
+                <button class="btn btn-ghost btn-sm" onclick="generateAudio('${id}')" title="Generate audio">
+                    <span class="material-symbols-outlined">graphic_eq</span>
+                </button>
+            </div>`;
+        grid.appendChild(card);
+    }
+    document.getElementById('exp-filter-label').textContent = `Showing ${count} experiment(s)`;
+}
+
+function filterByLab() {
+    const lab = document.getElementById('lab-filter').value;
+    renderExpGrid(lab);
+}
+
+function populateLabFilter() {
+    const sel = document.getElementById('lab-filter');
+    sel.innerHTML = '<option value="">All Labs</option>';
+    for (const [id, lab] of Object.entries(allLabs)) {
+        sel.innerHTML += `<option value="${id}">${lab.name} (${id})</option>`;
+    }
+    // Also populate add-exp lab selector
+    const fLab = document.getElementById('f-lab-id');
+    fLab.innerHTML = '';
+    for (const [id, lab] of Object.entries(allLabs)) {
+        fLab.innerHTML += `<option value="${id}">${lab.name}</option>`;
+    }
+}
+
+// ─────────────────────────────────────────────────
+// Add / Edit Experiment
+// ─────────────────────────────────────────────────
+function openAddExp() {
+    editingExpId = null;
+    document.getElementById('slide-title').textContent = 'Add Experiment';
+    clearExpForm();
+    // auto-set audio path when ID changes
+    document.getElementById('f-exp-id').oninput = () => {
+        const id = document.getElementById('f-exp-id').value.trim();
+        if (id && !editingExpId) document.getElementById('f-audio-loc').value = `audio/${id}.mp3`;
+    };
+    openSlide();
+}
+
+function openEditExp(id) {
+    editingExpId = id;
+    document.getElementById('slide-title').textContent = `Edit: ${id}`;
+    const exp = allExps[id] || {};
+    clearExpForm();
+
+    document.getElementById('f-exp-id').value = id;
+    document.getElementById('f-exp-id').disabled = true;
+    document.getElementById('f-lab-id').value = exp.lab_id || '';
+    document.getElementById('f-apparatus').value = exp.apparatus || '';
+    document.getElementById('f-short-desc').value = exp.short_desc || '';
+    document.getElementById('f-narration').value = exp.narration_script || '';
+    updateWordCount(document.getElementById('f-narration'), 'f-narration-wc');
+    document.getElementById('f-theory').value = typeof exp.theory === 'object'
+        ? Object.entries(exp.theory).map(([k,v]) => `${k}: ${v}`).join('\n\n')
+        : (exp.theory || '');
+    document.getElementById('f-audio-loc').value = exp.audio_loc || `audio/${id}.mp3`;
+    document.getElementById('f-qr-addr').value = exp.qr_addr || '';
+
+    (exp.objectives || []).forEach(o => addListItem('f-objectives', o, o));
+    (exp.key_points || []).forEach(k => addListItem('f-keypoints', k, k));
+    (exp.formulas || []).forEach(f => addListItem('f-formulas', f, f));
+    (exp.images || []).forEach(i => addListItem('f-images', i, i));
+
+    // Procedure — may be object of arrays or single array
+    const proc = exp.procedure || {};
+    if (Array.isArray(proc)) {
+        proc.forEach(s => addListItem('f-procedure', s, s));
+    } else {
+        for (const [method, steps] of Object.entries(proc)) {
+            if (Array.isArray(steps)) steps.forEach(s => addListItem('f-procedure', `[${method}] ${s}`, `[${method}] ${s}`));
         }
+    }
 
-        // ---- Save ----
-        async function saveAll() {
-            alog.info('💾 Save initiated…');
-            const content = document.getElementById('json-editor').value;
-            const apiKey = document.getElementById('admin-api-key').value.trim();
+    // Audio preview
+    const audioLoc = exp.audio_loc;
+    if (audioLoc) {
+        document.getElementById('f-audio-preview').src = audioLoc;
+    }
 
-            let parsed;
-            try {
-                parsed = JSON.parse(content);
-                alog.info(`📄 JSON parsed successfully — ${Object.keys(parsed).length} experiment entries`);
-            } catch (e) {
-                alog.error('📄 JSON parse error:', e.message);
-                toast('Invalid JSON — fix syntax errors first', 'error');
-                return;
+    openSlide();
+}
+
+function clearExpForm() {
+    ['f-exp-id','f-apparatus','f-short-desc','f-narration','f-theory','f-audio-loc','f-qr-addr'].forEach(id => {
+        const el = document.getElementById(id);
+        el.value = '';
+        el.disabled = false;
+    });
+    ['f-objectives','f-procedure','f-keypoints','f-formulas','f-images'].forEach(id => {
+        document.getElementById(id).innerHTML = '';
+    });
+    document.getElementById('f-narration-wc').textContent = '0 words';
+}
+
+async function saveExpForm() {
+    const id = document.getElementById('f-exp-id').value.trim();
+    if (!id) { showToast('Experiment ID is required', 'error'); return; }
+
+    const apparatus = document.getElementById('f-apparatus').value.trim();
+    if (!apparatus) { showToast('Apparatus/Title is required', 'error'); return; }
+
+    const lab_id = document.getElementById('f-lab-id').value;
+    const narration = document.getElementById('f-narration').value.trim();
+    const theoryRaw = document.getElementById('f-theory').value.trim();
+
+    // Parse theory into object
+    const theoryObj = {};
+    if (theoryRaw) {
+        theoryRaw.split('\n\n').forEach(block => {
+            const idx = block.indexOf(':');
+            if (idx > 0) {
+                const k = block.substring(0, idx).trim();
+                const v = block.substring(idx+1).trim();
+                if (k) theoryObj[k] = v;
             }
-
-            alog.info(`🔑 API key to save: ${apiKey ? 'YES (' + apiKey.length + ' chars)' : 'EMPTY'}`);
-
-            const startTime = performance.now();
-            try {
-                alog.net('→ POST /api/admin/update');
-                const res = await fetch('/api/admin/update', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ secret_token: adminToken, data: parsed, api_key: apiKey }),
-                });
-                const result = await res.json();
-                const elapsed = (performance.now() - startTime).toFixed(0);
-
-                if (result.status === 'success') {
-                    alog.info(`✅ Save successful in ${elapsed}ms`);
-                    toast('Saved successfully!', 'success');
-                } else {
-                    alog.error(`❌ Save failed: ${result.detail || 'Unknown error'}`);
-                    toast('Error: ' + (result.detail || 'Unknown'), 'error');
-                }
-            } catch (err) {
-                alog.error('💥 Save request failed:', err.message, err);
-                toast('Save failed: ' + err.message, 'error');
-            }
-        }
-
-        // ---- Format ----
-        function formatJSON() {
-            alog.info('🔧 Formatting JSON…');
-            const editor = document.getElementById('json-editor');
-            try {
-                const parsed = JSON.parse(editor.value);
-                editor.value = JSON.stringify(parsed, null, 4);
-                alog.info(`✅ JSON formatted — ${Object.keys(parsed).length} entries`);
-                toast('Formatted!', 'success');
-            } catch (e) {
-                alog.error('🔧 Format failed — invalid JSON:', e.message);
-                toast('Cannot format — invalid JSON', 'error');
-            }
-        }
-
-        // ---- Toast ----
-        function toast(msg, type) {
-            alog.info(`🍞 Toast [${type}]: ${msg}`);
-            const el = document.createElement('div');
-            el.className = `toast toast--${type}`;
-            el.textContent = msg;
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 3000);
-        }
-
-        // ---- Global error handler ----
-        window.onerror = (msg, src, line, col, err) => alog.error('Uncaught:', msg, `at ${src}:${line}:${col}`, err);
-        window.onunhandledrejection = (e) => alog.error('Unhandled rejection:', e.reason);
-
-        // Enter key to login
-        document.getElementById('admin-token').addEventListener('keydown', e => {
-            if (e.key === 'Enter') doLogin();
         });
-    </script>
-</body>
+    }
 
+    const data = {
+        lab_id,
+        apparatus,
+        short_desc: document.getElementById('f-short-desc').value.trim(),
+        narration_script: narration,
+        objectives: getListValues('f-objectives'),
+        theory: Object.keys(theoryObj).length > 0 ? theoryObj : theoryRaw,
+        procedure: getListValues('f-procedure'),
+        key_points: getListValues('f-keypoints'),
+        formulas: getListValues('f-formulas'),
+        images: getListValues('f-images'),
+        audio_loc: document.getElementById('f-audio-loc').value.trim() || `audio/${id}.mp3`,
+        qr_addr: document.getElementById('f-qr-addr').value.trim(),
+    };
+
+    try {
+        let res;
+        if (editingExpId) {
+            res = await fetch(`/api/admin/experiments/${id}`, {
+                method: 'PUT',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ secret_token: adminToken, data }),
+            });
+        } else {
+            res = await fetch(`/api/admin/labs/${lab_id}/experiments`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ secret_token: adminToken, exp_id: id, data }),
+            });
+        }
+
+        if (res.ok) {
+            showToast(editingExpId ? 'Experiment updated!' : 'Experiment added!', 'success');
+            closeSlide();
+            await loadExperiments();
+        } else {
+            const err = await res.json();
+            showToast('Error: ' + (err.detail || 'Unknown'), 'error');
+        }
+    } catch (e) {
+        showToast('Save failed: ' + e.message, 'error');
+    }
+}
+
+// ─────────────────────────────────────────────────
+// Delete Experiment
+// ─────────────────────────────────────────────────
+function confirmDeleteExp(id) {
+    document.getElementById('confirm-title').textContent = `Delete Experiment ${id}?`;
+    document.getElementById('confirm-body').textContent = `"${allExps[id]?.apparatus || id}" will be permanently removed. This cannot be undone.`;
+    document.getElementById('confirm-ok').onclick = () => deleteExp(id);
+    document.getElementById('confirm-overlay').classList.add('open');
+}
+
+async function deleteExp(id) {
+    closeConfirm();
+    try {
+        const res = await fetch(`/api/admin/experiments/${id}?token=${encodeURIComponent(adminToken)}`, { method: 'DELETE' });
+        if (res.ok) {
+            showToast(`${id} deleted`, 'success');
+            await loadExperiments();
+        } else {
+            const err = await res.json();
+            showToast('Delete failed: ' + (err.detail || 'Unknown'), 'error');
+        }
+    } catch (e) {
+        showToast('Delete error: ' + e.message, 'error');
+    }
+}
+
+function closeConfirm() { document.getElementById('confirm-overlay').classList.remove('open'); }
+
+// ─────────────────────────────────────────────────
+// Audio Generation
+// ─────────────────────────────────────────────────
+async function generateAudio(expId) {
+    showToast('Generating audio…', 'info');
+    try {
+        const res = await fetch(`/api/admin/experiments/${expId}/generate-audio?token=${encodeURIComponent(adminToken)}`, { method: 'POST' });
+        const data = await res.json();
+        if (res.ok) {
+            showToast(`Audio generated: ${data.file}`, 'success');
+        } else {
+            showToast('Audio: ' + (data.detail || 'Failed'), 'error');
+        }
+    } catch (e) {
+        showToast('Audio generation error', 'error');
+    }
+}
+
+async function generateAudioForForm() {
+    const id = document.getElementById('f-exp-id').value.trim() || editingExpId;
+    if (!id) { showToast('Save the experiment first to generate audio', 'error'); return; }
+    await generateAudio(id);
+    // Update preview
+    document.getElementById('f-audio-preview').src = `audio/${id}.mp3?t=` + Date.now();
+}
+
+// ─────────────────────────────────────────────────
+// Labs
+// ─────────────────────────────────────────────────
+function renderLabsList() {
+    const list = document.getElementById('labs-list');
+    list.innerHTML = '';
+    for (const [id, lab] of Object.entries(allLabs)) {
+        const expCount = (lab.exp_ids || []).length;
+        const card = document.createElement('div');
+        card.className = 'lab-card';
+        card.innerHTML = `
+            <div>
+                <div class="lab-card-id">${id}</div>
+                <div class="lab-card-name">${lab.name}</div>
+                <div class="lab-card-desc">${lab.description || ''} &bull; ${expCount} experiment(s)</div>
+            </div>
+            <div class="action-row">
+                <button class="btn btn-danger btn-sm" onclick="deleteLab('${id}')">
+                    <span class="material-symbols-outlined">delete</span>Delete
+                </button>
+            </div>`;
+        list.appendChild(card);
+    }
+}
+
+function openAddLab() {
+    ['f-lab-id-new','f-lab-name','f-lab-desc','f-lab-api'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-lab-use-universal').checked = true;
+    document.getElementById('lab-slide-overlay').classList.add('open');
+    document.getElementById('lab-slide-panel').classList.add('open');
+    renderLabsList();
+}
+function closeLabSlide() {
+    document.getElementById('lab-slide-overlay').classList.remove('open');
+    document.getElementById('lab-slide-panel').classList.remove('open');
+}
+
+async function saveLabForm() {
+    const labIdNew = document.getElementById('f-lab-id-new').value.trim().toUpperCase().replace(/\s+/g,'_');
+    const labName = document.getElementById('f-lab-name').value.trim();
+    if (!labIdNew || !labName) { showToast('Lab ID and Name are required', 'error'); return; }
+
+    try {
+        const res = await fetch('/api/admin/labs', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({
+                secret_token: adminToken,
+                lab_id: labIdNew,
+                name: labName,
+                description: document.getElementById('f-lab-desc').value.trim(),
+                api_key_override: document.getElementById('f-lab-api').value.trim(),
+                use_universal_key: document.getElementById('f-lab-use-universal').checked,
+            }),
+        });
+        if (res.ok) {
+            showToast('Lab created!', 'success');
+            // Refresh
+            const settingsRes = await fetch(`/api/admin/settings?token=${encodeURIComponent(adminToken)}`);
+            const settingsData = await settingsRes.json();
+            allLabs = settingsData.labs || {};
+            populateLabFilter();
+            renderLabsList();
+            closeLabSlide();
+        } else {
+            const err = await res.json();
+            showToast('Error: ' + (err.detail || 'Failed'), 'error');
+        }
+    } catch (e) {
+        showToast('Error: ' + e.message, 'error');
+    }
+}
+
+async function deleteLab(id) {
+    if (!confirm(`Delete lab "${id}"? Its experiments will remain in exps.json.`)) return;
+    const res = await fetch(`/api/admin/labs/${id}?token=${encodeURIComponent(adminToken)}`, { method: 'DELETE' });
+    if (res.ok) {
+        showToast('Lab deleted', 'success');
+        delete allLabs[id];
+        renderLabsList();
+        populateLabFilter();
+    } else {
+        showToast('Delete failed', 'error');
+    }
+}
+
+// ─────────────────────────────────────────────────
+// Settings
+// ─────────────────────────────────────────────────
+function renderPerLabKeys() {
+    const container = document.getElementById('per-lab-keys');
+    container.innerHTML = '';
+    for (const [id, lab] of Object.entries(allLabs)) {
+        const div = document.createElement('div');
+        div.className = 'field';
+        div.innerHTML = `
+            <label>${lab.name} (${id})</label>
+            <input type="password" id="lab-key-${id}" placeholder="Leave blank to use universal key" value="${lab.api_key_override || ''}" autocomplete="off">
+            <div class="field-hint toggle-row" style="margin-top:.4rem">
+                <span>Use universal key for this lab</span>
+                <label class="toggle"><input type="checkbox" id="lab-use-universal-${id}" ${lab.use_universal_key ? 'checked' : ''}><span class="toggle-slider"></span></label>
+            </div>`;
+        container.appendChild(div);
+    }
+}
+
+async function saveUniversalKey() {
+    const key = document.getElementById('universal-key').value.trim();
+    const res = await fetch('/api/admin/settings', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ secret_token: adminToken, universal_api_key: key }),
+    });
+    showToast(res.ok ? 'Universal key saved!' : 'Save failed', res.ok ? 'success' : 'error');
+}
+
+async function savePerLabKeys() {
+    const perLabKeys = {};
+    for (const id of Object.keys(allLabs)) {
+        const keyEl = document.getElementById(`lab-key-${id}`);
+        if (keyEl) perLabKeys[id] = keyEl.value.trim();
+    }
+    const res = await fetch('/api/admin/settings', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ secret_token: adminToken, per_lab_keys: perLabKeys }),
+    });
+    showToast(res.ok ? 'Lab keys saved!' : 'Save failed', res.ok ? 'success' : 'error');
+}
+
+// ─────────────────────────────────────────────────
+// Slide panel helpers
+// ─────────────────────────────────────────────────
+function openSlide() {
+    document.getElementById('slide-overlay').classList.add('open');
+    document.getElementById('slide-panel').classList.add('open');
+}
+function closeSlide() {
+    document.getElementById('slide-overlay').classList.remove('open');
+    document.getElementById('slide-panel').classList.remove('open');
+    document.getElementById('f-exp-id').disabled = false;
+    editingExpId = null;
+}
+
+// ─────────────────────────────────────────────────
+// Dynamic list helpers
+// ─────────────────────────────────────────────────
+function addListItem(containerId, placeholder = 'Value…', value = '') {
+    const container = document.getElementById(containerId);
+    const row = document.createElement('div');
+    row.className = 'dynamic-item';
+    row.innerHTML = `
+        <input type="text" placeholder="${placeholder}" value="${escHtml(value)}">
+        <button class="remove-btn" onclick="this.parentElement.remove()">×</button>`;
+    container.appendChild(row);
+}
+
+function getListValues(containerId) {
+    return Array.from(document.querySelectorAll(`#${containerId} .dynamic-item input`))
+        .map(i => i.value.trim())
+        .filter(v => v.length > 0);
+}
+
+// ─────────────────────────────────────────────────
+// Utilities
+// ─────────────────────────────────────────────────
+function updateWordCount(textarea, countId) {
+    const words = textarea.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+    document.getElementById(countId).textContent = `${words} word${words !== 1 ? 's' : ''}`;
+}
+
+function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showToast(msg, type = 'info') {
+    const el = document.createElement('div');
+    el.className = `toast toast--${type}`;
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+}
+
+// Navigate to labs page — render labs list
+document.getElementById('nav-labs').addEventListener('click', renderLabsList);
+
+window.onerror = (m,s,l,c,e) => console.error('[ADMIN]', m, e);
+window.onunhandledrejection = e => console.error('[ADMIN] rejection:', e.reason);
+</script>
+</body>
 </html>

@@ -1,43 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POC AI Lab — Interactive Experiments</title>
-    <meta name="description" content="Explore metrology and instrumentation lab experiments with AI-powered guidance.">
+    <title>MQC AI Lab — Interactive Experiments</title>
+    <meta name="description" content="Explore Metrology & Quality Control lab experiments with AI-powered guidance. MES College of Engineering, Pune.">
 
-    <!-- Material Symbols (Outlined) -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <!-- Google Fonts — matching M3 Expressive typography -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
-        rel="stylesheet">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
 
+    <style>
+        /* ── Tab Strip ──────────────────────── */
+        .tab-strip {
+            display: flex; gap: 0; border-bottom: 2px solid var(--md-sys-color-outline-variant);
+            margin: 1rem 0 0; overflow-x: auto; scrollbar-width: none;
+        }
+        .tab-strip::-webkit-scrollbar { display: none; }
+        .tab-btn {
+            display: flex; align-items: center; gap: 0.35rem;
+            padding: 0.65rem 1.1rem; border: none; background: none;
+            color: var(--md-sys-color-on-surface-variant); font-family: 'Google Sans', sans-serif;
+            font-size: 0.87rem; font-weight: 500; cursor: pointer; white-space: nowrap;
+            border-bottom: 2px solid transparent; margin-bottom: -2px;
+            transition: color .2s, border-color .2s;
+        }
+        .tab-btn .material-symbols-outlined { font-size: 1rem; }
+        .tab-btn.active { color: var(--md-sys-color-primary); border-bottom-color: var(--md-sys-color-primary); }
+        .tab-panel { display: none; padding: 1.25rem 0 0; }
+        .tab-panel.active { display: block; }
+
+        /* ── Procedure steps ────────────────── */
+        .procedure-section { margin-bottom: 1.25rem; }
+        .procedure-section h4 {
+            font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em;
+            color: var(--md-sys-color-primary); margin: 0 0 0.6rem;
+        }
+        .step-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+        .step-item {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            background: var(--md-sys-color-surface-container);
+            border-left: 3px solid var(--md-sys-color-primary);
+            border-radius: 0 10px 10px 0; padding: 0.65rem 0.9rem; font-size: 0.87rem;
+        }
+        .step-num {
+            min-width: 22px; height: 22px; background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0;
+        }
+
+        /* ── Theory blocks ──────────────────── */
+        .theory-block {
+            background: var(--md-sys-color-surface-container);
+            border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem;
+        }
+        .theory-block h4 { font-size: 0.82rem; font-weight: 700; color: var(--md-sys-color-primary); margin: 0 0 0.4rem; text-transform: uppercase; letter-spacing: .05em; }
+        .theory-block p { font-size: 0.87rem; margin: 0; line-height: 1.6; color: var(--md-sys-color-on-surface-variant); }
+
+        /* ── Formula chips ──────────────────── */
+        .formula-grid { display: flex; flex-direction: column; gap: 0.5rem; }
+        .formula-chip {
+            background: var(--md-sys-color-surface-container-high);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 8px; padding: 0.5rem 0.85rem; font-family: 'Roboto Mono', monospace;
+            font-size: 0.82rem; color: var(--md-sys-color-on-surface);
+        }
+
+        /* ── Key points ─────────────────────── */
+        .key-points-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+        .key-point-item {
+            display: flex; gap: 0.6rem; align-items: flex-start;
+            font-size: 0.87rem; color: var(--md-sys-color-on-surface);
+        }
+        .key-point-item .material-symbols-outlined { font-size: 1rem; color: var(--md-sys-color-primary); flex-shrink: 0; margin-top: 0.1rem; }
+
+        /* ── Objectives ─────────────────────── */
+        .objectives-list {
+            list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.4rem; counter-reset: obj-counter;
+        }
+        .objectives-list li {
+            display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.87rem;
+            counter-increment: obj-counter; color: var(--md-sys-color-on-surface);
+        }
+        .objectives-list li::before {
+            content: counter(obj-counter);
+            min-width: 20px; height: 20px; background: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0;
+        }
+
+        /* ── Audio player enhanced ──────────── */
+        .audio-section { display: flex; align-items: center; gap: 0.75rem; margin: 0.75rem 0; padding: 0.75rem; background: var(--md-sys-color-surface-container); border-radius: 12px; }
+        .audio-label { font-size: 0.78rem; color: var(--md-sys-color-on-surface-variant); white-space: nowrap; }
+        .audio-section audio { flex: 1; height: 36px; min-width: 120px; }
+
+        /* ── Narration text ─────────────────── */
+        .narration-card { background: linear-gradient(135deg, var(--md-sys-color-primary-container) 0%, var(--md-sys-color-surface-container) 100%); border-radius: 14px; padding: 1.1rem 1.25rem; margin-bottom: 0.75rem; }
+        .narration-card .narration-eyebrow { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--md-sys-color-primary); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.3rem; }
+        .narration-card p { font-size: 0.87rem; line-height: 1.7; color: var(--md-sys-color-on-surface); margin: 0; }
+
+        /* ── Chat — friendly ─────────────────── */
+        .chat-greeting { font-size: 0.82rem; color: var(--md-sys-color-on-surface-variant); font-style: italic; margin-top: 0.25rem; }
+    </style>
+</head>
 <body>
 
-    <!-- ======================== TOP APP BAR ======================== -->
+    <!-- TOP APP BAR -->
     <header class="top-app-bar">
         <div class="top-app-bar__inner">
             <span class="material-symbols-outlined top-app-bar__icon">science</span>
-            <h1 class="top-app-bar__title">POC AI Lab</h1>
+            <h1 class="top-app-bar__title">MQC AI Lab</h1>
         </div>
     </header>
 
-    <!-- ======================== HERO ======================== -->
+    <!-- HERO -->
     <section class="hero" id="hero">
         <div class="hero__text">
             <h2 class="display-large">Explore.<br>Experiment.<br>Understand.</h2>
-            <p class="body-large">AI-powered interactive metrology lab — tap any experiment to dive in.</p>
+            <p class="body-large">AI-powered Metrology &amp; Quality Control Lab — tap any experiment to dive in.</p>
         </div>
         <div class="hero__shape"></div>
     </section>
 
-    <!-- ======================== EXPERIMENT LIST ======================== -->
+    <!-- EXPERIMENT LIST -->
     <main class="surface-container" id="main-content">
         <section id="experiment-list" class="experiment-grid">
             <div class="loader" id="loader">
@@ -46,7 +131,7 @@
             </div>
         </section>
 
-        <!-- ======================== EXPERIMENT DETAIL ======================== -->
+        <!-- EXPERIMENT DETAIL -->
         <section id="experiment-details" class="hidden">
             <!-- Back FAB -->
             <button id="back-btn" class="fab fab--secondary" aria-label="Back to list">
@@ -54,48 +139,83 @@
             </button>
 
             <div class="detail-layout">
-                <!-- LEFT — Media -->
+                <!-- LEFT — Media + Info -->
                 <article class="detail-card media-card">
                     <h2 id="exp-title" class="headline-large"></h2>
+                    <p id="exp-short-desc" style="font-size:0.87rem;color:var(--md-sys-color-on-surface-variant);margin:0.25rem 0 0.75rem"></p>
 
                     <!-- Carousel -->
                     <div class="carousel" id="carousel">
                         <div class="carousel__track" id="carousel-track"></div>
-                        <button class="carousel__btn carousel__btn--prev" id="carousel-prev"
-                            aria-label="Previous image">
-                            <span class="material-symbols-outlined">chevron_left</span>
-                        </button>
-                        <button class="carousel__btn carousel__btn--next" id="carousel-next" aria-label="Next image">
-                            <span class="material-symbols-outlined">chevron_right</span>
-                        </button>
+                        <button class="carousel__btn carousel__btn--prev" id="carousel-prev" aria-label="Previous"><span class="material-symbols-outlined">chevron_left</span></button>
+                        <button class="carousel__btn carousel__btn--next" id="carousel-next" aria-label="Next"><span class="material-symbols-outlined">chevron_right</span></button>
                         <div class="carousel__dots" id="carousel-dots"></div>
                     </div>
 
-                    <!-- Audio -->
+                    <!-- Audio player -->
                     <div class="audio-section">
-                        <span class="material-symbols-outlined">graphic_eq</span>
+                        <span class="material-symbols-outlined" style="color:var(--md-sys-color-primary)">graphic_eq</span>
+                        <span class="audio-label">Listen</span>
                         <audio id="exp-audio" controls></audio>
                     </div>
 
-                    <!-- Narration -->
-                    <p id="narration-text" class="body-medium narration-text"></p>
+                    <!-- Narration card -->
+                    <div class="narration-card" id="narration-card">
+                        <div class="narration-eyebrow"><span class="material-symbols-outlined" style="font-size:.9rem">record_voice_over</span> Narration</div>
+                        <p id="narration-text"></p>
+                    </div>
+
+                    <!-- Tab Strip -->
+                    <div class="tab-strip" id="tab-strip">
+                        <button class="tab-btn active" onclick="switchTab('overview')" id="tab-overview">
+                            <span class="material-symbols-outlined">info</span>Overview
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('procedure')" id="tab-procedure">
+                            <span class="material-symbols-outlined">list_alt</span>Procedure
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('theory')" id="tab-theory">
+                            <span class="material-symbols-outlined">menu_book</span>Theory
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('keypoints')" id="tab-keypoints">
+                            <span class="material-symbols-outlined">tips_and_updates</span>Key Points
+                        </button>
+                    </div>
+
+                    <!-- Tab: Overview -->
+                    <div class="tab-panel active" id="panel-overview">
+                        <ul id="objectives-list" class="objectives-list"></ul>
+                        <div class="formula-grid" id="formula-grid" style="margin-top:1rem"></div>
+                    </div>
+
+                    <!-- Tab: Procedure -->
+                    <div class="tab-panel" id="panel-procedure">
+                        <div id="procedure-content"></div>
+                    </div>
+
+                    <!-- Tab: Theory -->
+                    <div class="tab-panel" id="panel-theory">
+                        <div id="theory-content"></div>
+                    </div>
+
+                    <!-- Tab: Key Points -->
+                    <div class="tab-panel" id="panel-keypoints">
+                        <ul id="keypoints-list" class="key-points-list"></ul>
+                    </div>
                 </article>
 
                 <!-- RIGHT — AI Chat -->
                 <aside class="detail-card chat-card">
                     <div class="chat-header">
                         <span class="material-symbols-outlined">smart_toy</span>
-                        <h3 class="title-large">Lab Assistant</h3>
-                    </div>
-                    <div id="chat-messages" class="chat-messages">
-                        <div class="message ai">
-                            <p>👋 Hi! I'm your AI lab assistant. Ask me anything about this experiment.</p>
+                        <div>
+                            <h3 class="title-large" style="margin:0">Lab Assistant</h3>
+                            <p class="chat-greeting" id="chat-greeting">Ask me anything about this experiment!</p>
                         </div>
                     </div>
+                    <div id="chat-messages" class="chat-messages"></div>
                     <div class="chat-input-area">
-                        <input type="text" id="chat-input" class="chat-input" placeholder="Ask a question…"
-                            autocomplete="off">
-                        <button id="send-btn" class="fab fab--primary fab--small" aria-label="Send message">
+                        <input type="text" id="chat-input" class="chat-input" placeholder="Ask a question…" autocomplete="off">
+                        <button id="send-btn" class="fab fab--primary fab--small" aria-label="Send">
                             <span class="material-symbols-outlined">send</span>
                         </button>
                     </div>
@@ -104,12 +224,11 @@
         </section>
     </main>
 
-    <!-- ======================== FOOTER ======================== -->
+    <!-- FOOTER -->
     <footer class="footer">
-        <p class="body-small">&copy; 2026 POC AI Lab &mdash; Metrology & Instrumentation Department</p>
+        <p class="body-small">&copy; 2026 MQC AI Lab &mdash; Metrology &amp; Quality Control, MES College of Engineering, Pune</p>
     </footer>
 
     <script src="app.js"></script>
 </body>
-
 </html>

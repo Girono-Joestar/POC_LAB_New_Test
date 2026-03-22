@@ -1,118 +1,377 @@
-﻿{
-  "BKR-01": {
-    "apparatus": "BAKER Dead Weight Tester",
-    "narration_script": "The BAKER Dead Weight Tester is used for fundamental calibration of pressure measuring instruments such as strain gauges and pressure gauges. It works on the principle of balancing a known weight over a calibrated piston area to generate precise pressure.",
-    "images": [
-      "https://nagman.com/wp-content/uploads/2023/12/H6900.webp"
-    ],
-    "audio_loc": "audio/BKR-01.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-01"
-  },
-  "BKR-02": {
-    "apparatus": "BAKER Linear and Angular Measurement Instruments",
-    "narration_script": "This setup includes Vernier Calipers, Screw Gauges, Dial Gauges, Height Gauges, and Bevel Protectors for precision dimensional measurement and error analysis.",
-    "images": [
-      "https://bakergauges.com/wp-content/uploads/2015/04/prod-feat-VCF20.jpg",
-      "https://bakergauges.com/wp-content/uploads/2015/03/prod-feat-digitmicromet-mec-100.jpg"
-    ],
-    "audio_loc": "audio/BKR-02.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-02"
-  },
-  "BKR-03": {
-    "apparatus": "BAKER Go-No Go Limit Gauges",
-    "narration_script": "BAKER Limit Gauges demonstrate Goâ€“No Go gauging based on Taylorâ€™s Principle for checking maximum and minimum material conditions.",
-    "images": [
-      "https://industrofy.com/cdn/shop/files/baker-make-thread-plug-guage.png?v=1757314075&width=950",
-      "https://2.imimg.com/data2/OS/XC/IMFCP-1480317/product_95-250x250.gif"
-    ],
-    "audio_loc": "audio/BKR-03.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-03"
-  },
-  "BKR-04": {
-    "apparatus": "BAKER Surface Roughness Tester",
-    "narration_script": "The BAKER Surface Roughness Tester measures surface texture parameters such as Ra using a stylus-based profiling system.",
-    "images": [
-      "https://bakergauges.com/wp-content/uploads/2020/09/TAD1684-scaled.jpg"
-    ],
-    "audio_loc": "audio/BKR-04.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-04"
-  },
-  "BKR-05": {
-    "apparatus": "BAKER Optical Projector and Tool Makersâ€™ Microscope",
-    "narration_script": "This apparatus is used for optical inspection and non-contact measurement of tool geometry and small components.",
-    "images": [
-      "https://www.sipconinstrument.com/media/products/tool-makers-microscope4.jpg",
-      "https://bakergauges.com/wp-content/uploads/2019/05/SM350.jpg"
-    ],
-    "audio_loc": "audio/BKR-05.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-05"
-  },
-  "BKR-06": {
-    "apparatus": "BAKER Electrical, Mechanical, Optical and Pneumatic Comparators",
-    "narration_script": "These comparators are used for detecting small dimensional deviations by comparing test components with master standards.",
-    "images": [
-      "https://5.imimg.com/data5/SELLER/Default/2021/7/HO/FU/YN/1865318/baker-dial-indicator.jpg",
-      "https://www.elprocus.com/wp-content/uploads/Pneumatic-Comparator.jpg"
-    ],
-    "audio_loc": "audio/BKR-06.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-06"
-  },
-  "BKR-07": {
-    "apparatus": "BAKER Strain Gauge Experimental Setup",
-    "narration_script": "This setup determines modulus of elasticity using strain gauges by measuring resistance variation under applied stress.",
-    "images": [
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_1oMUsTNzXC-kA7Bx6DC0m-tBeEMxXO-ItA&s"
-    ],
-    "audio_loc": "audio/BKR-07.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-07"
-  },
-  "BKR-08": {
-    "apparatus": "BAKER Gear Tooth Vernier Caliper and Thermocouple Calibration Setup",
-    "narration_script": "This setup includes calibration of thermocouples and gear tooth measurements using a Gear Tooth Vernier Caliper.",
-    "images": [
-      "https://www.yuzuki.co.in/wp-content/uploads/2018/11/Digital-Gear-Tooth-Caliper-1.jpg",
-      "https://3.imimg.com/data3/IA/MI/MY-5504636/temperature-calibration-500x500.jpg"
-    ],
-    "audio_loc": "audio/BKR-08.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-08"
-  },
-  "BKR-09": {
-    "apparatus": "BAKER Stroboscope and Speed Pickup Calibration Setup",
-    "narration_script": "This setup measures and calibrates rotational speed using stroboscopic light pulses and magnetic/photo pickups.",
-    "images": [
-      "https://image.made-in-china.com/2f0j00GZLoOyFmQIkD/Stroboscopic-Tachometer-Digital-and-Portable-Stroboscope.webp",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKJSToq8af2AYXzIHW_5vS27e731Ez9XNDHQ&s"
-    ],
-    "audio_loc": "audio/BKR-09.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-09"
-  },
-  "BKR-10": {
-    "apparatus": "BAKER Flow Rate Measurement Setup",
-    "narration_script": "This apparatus is used for flow rate calibration using anemometers and ultrasonic flow meters, including RPN analysis for risk evaluation.",
-    "images": [
-      "https://www.bakerhughes.com/sites/bakerhughes/files/2021-12/panaflowz3-front.jpg",
-      "https://fluidhandlingpro.com/wp-content/uploads/2020/04/Anemometers.jpg"
-    ],
-    "audio_loc": "audio/BKR-10.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-10"
-  },
-  "BKR-11": {
-    "apparatus": "BAKER Coordinate Measuring Machine (CMM)",
-    "narration_script": "The BAKER CMM verifies geometric tolerances using coordinate-based 3D measurement as per ISO 10360-5:2020.",
-    "images": [
-      "https://bakergauges.com/wp-content/uploads/2021/04/Horizon-CMM-1-e1618392625859-480x595.jpg"
-    ],
-    "audio_loc": "audio/BKR-11.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-11"
-  },
-  "BKR-12": {
-    "apparatus": "BAKER Digital Metrology and Scilab Application Station",
-    "narration_script": "This station integrates measurement data with computational tools like Scilab for digital metrology analysis and calculator/app development.",
-    "images": [
-      "https://bakergauges.com/wp-content/uploads/2015/04/feat_airgaug.jpg",
-      "https://www.scilab.org/sites/default/files/flexdock2.png"
-    ],
-    "audio_loc": "audio/BKR-12.mp3",
-    "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=BKR-12"
-  }
+{
+    "MQC-01": {
+        "lab_id": "MQC",
+        "apparatus": "Linear Measurement Instruments — Vernier, Digital Vernier & Micrometer",
+        "short_desc": "Measure component dimensions using three precision instruments and analyse their accuracy levels.",
+        "narration_script": "Welcome to Experiment 1 of the Metrology and Quality Control Lab — Linear Measurement.\n\nIn precision engineering, knowing the exact dimensions of a component is the foundation of quality. This experiment introduces you to three fundamental hand tools: the Vernier Calliper, the Digital Vernier Calliper, and the Micrometer Screw Gauge. Each of these instruments works on a different principle, yet they all serve the same goal — measuring linear dimensions with high accuracy.\n\nThe Vernier Calliper uses the concept of two scales of slightly different sizes. By identifying which division on the Vernier scale lines up with a division on the main scale, we can read down to 0.02 millimetres. The Digital Vernier works on the same physical principle but displays the reading directly with a least count of 0.01 mm — eliminating human reading error.\n\nThe Micrometer Screw Gauge relies on a precision screw and nut mechanism. One full rotation of the thimble advances the spindle by 0.5 mm — the pitch. Since the thimble has 50 divisions, each division represents 0.5 divided by 50, which equals 0.01 millimetres.\n\nIn this experiment, you will take three readings from different positions on a test specimen with each instrument, compute the average, and compare the results across instruments. This comparison helps you appreciate which tool is most appropriate for a given measurement task. Always check for zero error before measuring, apply consistent, light pressure, and never force the jaws shut.",
+        "objectives": [
+            "Understand the operating principle of Vernier, Digital Vernier, and Micrometer instruments",
+            "Measure linear dimensions of a given specimen using all three instruments",
+            "Compare precision and accuracy levels across instruments",
+            "Perform error analysis and calculate averages from multiple readings"
+        ],
+        "theory": {
+            "Vernier Calliper Principle": "Two scales of slightly different sizes are used. Least Count (LC) = Main Scale Division / Total Vernier Divisions = 1 mm / 50 = 0.02 mm. Reading = MSR + (LC × Coinciding Vernier Division).",
+            "Micrometer Principle": "Screw and nut mechanism converts rotary motion to linear displacement. LC = Pitch / Thimble Divisions = 0.5 mm / 50 = 0.01 mm. Reading = Barrel Reading + (LC × Thimble Division) − Zero Error.",
+            "Precision Requirements": "Precision instruments have an error ≤ 0.0025 mm. Non-precision instruments allow errors > 0.25 mm. The five requirements of a good measuring instrument are: accuracy, durability, ease of use, readability, and robustness."
+        },
+        "procedure": {
+            "Vernier Calliper": [
+                "Hold the calliper firmly with the specimen placed between the measuring tips.",
+                "Ensure the tips make full, flat contact with the object surfaces — no tilting.",
+                "Apply a light, consistent pressure. Do NOT use the ratchet on a Vernier calliper.",
+                "Read the Main Scale Reading (MSR) — the last visible main scale division before the zero of the Vernier scale.",
+                "Identify the Vernier division that coincides exactly with a main scale line.",
+                "Calculate: Total Reading = MSR + (LC × Coinciding Vernier Division).",
+                "Repeat the measurement at two more positions to detect any taper.",
+                "Record all three readings and compute the average."
+            ],
+            "Digital Vernier Calliper": [
+                "With jaws fully closed, press the Zero / On button to reset the display to 0.000 mm.",
+                "Open the jaws and place the specimen between them.",
+                "Slide the movable jaw gently until it makes light contact with the specimen.",
+                "Read the measurement directly from the digital display (LC: 0.01 mm).",
+                "Take readings at three different positions and record each value.",
+                "Compute the average of the three readings."
+            ],
+            "Micrometer Screw Gauge": [
+                "Close the spindle fully and check for zero error — note and record any reading offset.",
+                "Open the micrometer sufficiently and place the specimen between the anvil and spindle.",
+                "Rotate the thimble slowly until the specimen is gently clamped; use the ratchet for consistent pressure.",
+                "Lock the spindle using the locking lever to freeze the reading.",
+                "Read the barrel scale: the last visible whole-mm mark and, if visible, the 0.5 mm mark.",
+                "Read the thimble scale: the division aligned with the reference line on the barrel.",
+                "Calculate: Total Reading = Barrel Reading + (LC × Thimble Division) − Zero Error.",
+                "Take readings at three different positions and compute the average."
+            ]
+        },
+        "key_points": [
+            "Always check and record zero error before taking any measurement.",
+            "Apply consistent, light pressure — do not over-tighten the instrument.",
+            "Take a minimum of three readings from different positions for statistical reliability.",
+            "The Micrometer is the most accurate of the three instruments (LC: 0.01 mm).",
+            "Digital instruments eliminate parallax and reading errors.",
+            "Compare averages across instruments to validate the measurement."
+        ],
+        "formulas": [
+            "LC (Vernier) = 1 mm / 50 = 0.02 mm",
+            "Reading (Vernier) = MSR + (LC × Coinciding Division)",
+            "LC (Micrometer) = 0.5 mm / 50 = 0.01 mm",
+            "Reading (Micrometer) = Barrel + (LC × Thimble) − Zero Error"
+        ],
+        "images": [
+            "https://images.unsplash.com/photo-1581092335878-2d9ff86ca2bf?w=600&q=80",
+            "https://images.unsplash.com/photo-1565177508283-9943c41a9a01?w=600&q=80"
+        ],
+        "audio_loc": "audio/MQC-01.mp3",
+        "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-01"
+    },
+    "MQC-02": {
+        "lab_id": "MQC",
+        "apparatus": "Dial Gauge Calibration Setup — Slip Gauges & Calibration Tester",
+        "short_desc": "Calibrate a dial gauge using precision slip gauges to verify accuracy and find worn-out zones.",
+        "narration_script": "Welcome to Experiment 2 — Calibration of the Dial Gauge.\n\nA measuring instrument is only as trustworthy as its last calibration. This experiment teaches you why and how we periodically verify the accuracy of a dial gauge — one of the most widely used indicators in manufacturing and quality control.\n\nThe dial gauge works on the principle of rack and pinion: a small linear movement of the plunger is converted into a rotary movement of the pointer on the dial. With a least count of 0.01 millimetres, the dial gauge is capable of detecting very fine surface variations. However, over time, internal mechanical wear causes deviations — it may read correctly in some zones but be off in others.\n\nCalibration is performed by comparing the dial gauge reading against a known, traceable standard — in this case, Grade 0 slip gauges. Slip gauges, also called gauge blocks, are precision ground steel blocks with extremely accurate dimensions. We stack them in 0.5 mm increments from zero to ten millimetres, checking the dial gauge at each step going up and then again going down.\n\nIf the reading matches the slip gauge stack within tolerance, that zone is acceptable. Any zone with excessive deviation is flagged as a worn-out zone. If multiple zones are inaccurate, the gauge is beyond its serviceable life and must be discarded. This systematic process protects product quality by ensuring only reliable instruments are used on the shop floor.",
+        "objectives": [
+            "Understand the principle and importance of periodic instrument calibration",
+            "Perform complete calibration of a dial gauge using slip gauges",
+            "Identify worn-out or inaccurate measurement zones",
+            "Determine the discardation threshold of the instrument"
+        ],
+        "theory": {
+            "Why Calibration is Required": "Manufacturing tolerances are increasingly tight. A dial gauge that was accurate when new may drift due to mechanical wear, shock, or temperature variation. Calibration grades the instrument, reveals worn zones, and determines when an instrument must be discarded.",
+            "Calibration Principle": "The gauge is compared against Grade 0 slip gauges — the reference standard. The difference between the expected reading (from the slip gauge size) and the actual dial reading gives the error at that point. Repeatability is checked by measuring both ascending and descending.",
+            "Hysteresis": "The difference in reading between the ascending and descending passes at the same nominal displacement. Significant hysteresis indicates internal friction or play in the mechanism."
+        },
+        "procedure": {
+            "Setup & Zero": [
+                "Mount the dial gauge on the calibration tester holding stand, ensuring the plunger is vertical.",
+                "Lower the plunger until it just touches the reference platform.",
+                "Use the bezel-rotate knob to set the pointer exactly to zero on the dial face.",
+                "Use the small displacement knob for fine zero adjustment if needed, then re-zero."
+            ],
+            "Ascending Calibration (0 → 10 mm)": [
+                "Place a 0.5 mm slip gauge under the plunger. The dial should read 0.50 mm.",
+                "If it does not read 0.50 mm, note the deviation. Adjust the screw under the dust-protection cap if available.",
+                "Add a 1.0 mm slip gauge (total 1.5 mm). Verify reading.",
+                "Continue adding slip gauges in 0.5 mm steps up to a total of 10 mm, recording the deviation at each step.",
+                "Record all ascending readings in the observation table."
+            ],
+            "Descending Calibration (10 → 0 mm)": [
+                "Remove slip gauges one by one in the reverse order (10 mm → 9.5 mm → ... → 0).",
+                "Record the dial reading at each step during the descending pass.",
+                "Compare ascending and descending readings at each point — the difference is hysteresis."
+            ],
+            "Analysis": [
+                "Plot deviation vs. nominal displacement to identify worn-out zones.",
+                "Flag any zone where error exceeds the permissible tolerance for the gauge grade.",
+                "Document the discardation threshold — if total error range exceeds the manufacturer limit, the gauge must be replaced."
+            ]
+        },
+        "key_points": [
+            "Always use Grade 0 slip gauges for calibration — lower grades introduce their own errors.",
+            "Record readings to 0.01 mm — the dial gauge's full resolution.",
+            "Hysteresis (ascending vs descending difference) reveals internal mechanical wear.",
+            "A zone is 'worn out' if its deviation consistently exceeds the instrument's tolerance specification.",
+            "If the gauge shows excessive errors across multiple zones, it should be discarded or sent for repair.",
+            "Temperature must be stable during calibration — thermal expansion affects slip gauge accuracy."
+        ],
+        "formulas": [
+            "Deviation = Actual Dial Reading − Nominal Slip Gauge Value",
+            "Hysteresis = |Ascending Reading − Descending Reading| at the same nominal value"
+        ],
+        "images": [
+            "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80",
+            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80"
+        ],
+        "audio_loc": "audio/MQC-02.mp3",
+        "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-02"
+    },
+    "MQC-03": {
+        "lab_id": "MQC",
+        "apparatus": "Floating Carriage Micrometer — Thread Parameter Measurement",
+        "short_desc": "Measure major and effective diameters of a screw thread plug gauge using wire methods.",
+        "narration_script": "Welcome to Experiment 3 — Thread Parameter Measurement using the Floating Carriage Micrometer.\n\nScrew threads are everywhere in mechanical assemblies — they transmit power, fasten components, and create precise adjustable fits. But a thread is a complex three-dimensional form defined by several parameters. To ensure two threaded parts will fit correctly, we need to measure those parameters with great accuracy.\n\nThis experiment focuses on two critical dimensions: the Major Diameter — the largest diameter of the thread profile — and the Effective Diameter, also called the Pitch Diameter — the imaginary cylinder at which the width of the thread and the width of the space are equal. Errors in the effective diameter directly cause assembly problems — either the parts won't fit, or they will be too loose.\n\nThe Floating Carriage Micrometer is a specialist bench instrument with a carriage that floats on air bearings or slides, allowing the micrometer to self-align with the thread axis. This eliminates misalignment errors that would occur with a hand-held micrometer.\n\nWe use wire methods — placing precision wires of known diameter in the thread grooves — to convert an indirect measurement of the wire geometry into a calculation of the effective diameter. The Three Wire Method is the most accurate, and the Best Wire Size is the diameter that contacts the thread exactly at the pitch line, giving a direct reading of the effective diameter.",
+        "objectives": [
+            "Study the construction and operation of the Floating Carriage Micrometer",
+            "Measure the major diameter of a thread plug gauge",
+            "Measure the effective (pitch) diameter using the two-wire method",
+            "Study and apply the best wire size calculation for threads"
+        ],
+        "theory": {
+            "Screw Thread Terminology": "Major Diameter (D): cylinder touching crests. Minor Diameter: cylinder touching roots. Effective/Pitch Diameter (E): cylinder where thread and space width are equal. Pitch (p): axial distance between adjacent thread crests. Thread Angle (2θ): included angle between flanks.",
+            "Why Effective Diameter Matters": "The effective diameter controls the fit between mating threads. A thread gauge is accepted or rejected based primarily on effective diameter tolerance. Over-size effective diameter on a plug gauge → plug won't enter the nut. Under-size → excessive play.",
+            "Two Wire Method": "Two wires of equal, known diameter (d) are placed in opposite thread grooves. The micrometer reading over the wires plus the corrections for wire geometry gives the effective diameter. T = S − (R1 − R2), then E = T + P, where P is the thread form constant.",
+            "Three Wire Method": "Most accurate. Two wires on one side, one on the other. E = M − Q, where Q = W(1 + cosec θ) − (p/2)cot θ. W = wire diameter, θ = thread half angle, p = pitch.",
+            "Best Wire Size": "db = (p/2) × sec(θ) — the wire diameter that contacts the thread exactly at the pitch line."
+        },
+        "procedure": {
+            "Major Diameter (Ordinary Micrometer)": [
+                "Prepare a setting gauge (master cylinder) with a diameter close to the thread major diameter.",
+                "Place the setting gauge between the micrometer anvils on the floating carriage.",
+                "Record reading R1 — the micrometer reading over the setting gauge.",
+                "Replace the setting gauge with the screw thread specimen.",
+                "Record reading R2 — the micrometer reading over the thread crests.",
+                "Calculate: Major Diameter = D + (R2 − R1), where D = diameter of setting gauge.",
+                "Repeat at 2–3 axial positions to detect taper, and 2–3 angular positions to detect ovality."
+            ],
+            "Effective Diameter (Two Wire Method)": [
+                "Select wires of suitable diameter — ideally the best wire size for the thread.",
+                "Place two wires between the thread grooves and the micrometer anvils.",
+                "Record R1 = micrometer reading over the setting standard with wires.",
+                "Replace standard with the screw thread; keep wires in place.",
+                "Record R2 = micrometer reading over the thread with wires.",
+                "Calculate: T = S − (R1 − R2), then E = T + P.",
+                "For Metric threads: P = 0.866p − d. For Whitworth threads: P = 0.9605p − 1.1657d."
+            ]
+        },
+        "key_points": [
+            "Apply light pressure only — heavy contact deforms thread crests and gives false readings.",
+            "The bench micrometer provides greater accuracy than a hand-held micrometer due to its fixed alignment.",
+            "The Three Wire Method is the most accurate technique for effective diameter measurement.",
+            "Best wire size ensures the wire contacts the thread at the pitch line — giving a direct reading.",
+            "Measure at multiple axial positions to detect taper; multiple angular positions to detect ovality.",
+            "The floating carriage self-aligns to the thread axis, eliminating cosine errors."
+        ],
+        "formulas": [
+            "Major Diameter = D + (R2 − R1)",
+            "Best Wire Size: db = (p/2) × sec θ",
+            "Two Wire: T = S − (R1 − R2);  E = T + P",
+            "P (Metric) = 0.866p − d",
+            "P (Whitworth) = 0.9605p − 1.1657d",
+            "Three Wire: E = M − [W(1 + cosec θ) − (p/2) cot θ]"
+        ],
+        "images": [
+            "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80",
+            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80"
+        ],
+        "audio_loc": "audio/MQC-03.mp3",
+        "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-03"
+    },
+    "MQC-04": {
+        "lab_id": "MQC",
+        "apparatus": "Profile Projector & Tool Maker's Microscope",
+        "short_desc": "Inspect and measure small component profiles using magnified optical projection and microscopy.",
+        "narration_script": "Welcome to Experiment 4 — Optical Inspection using the Profile Projector and Tool Maker's Microscope.\n\nSome components are simply too small or too intricate to be measured reliably by direct contact instruments. Optical inspection methods project a magnified shadow or image of the workpiece, letting us compare shapes, measure angles, and determine dimensions non-destructively.\n\nThe Profile Projector uses a light source and projection lens system to cast an enlarged silhouette of the component onto a frosted screen — often at 10×, 20×, or 50× magnification. You can then overlay a precision scale drawing on the screen and directly read off deviations from the intended profile. This is particularly valuable for checking complex shapes like gear teeth, cams, and cutting tool profiles.\n\nThe Tool Maker's Microscope is a more direct measurement instrument. The workpiece is placed on a precision glass table that can be traversed in two perpendicular directions by calibrated micrometer drums. By focusing the microscope on specific features — edges, thread flanks, or gear tooth faces — and moving the table between two measurement points, you can determine exact dimensions with a least count down to 1 micrometre.\n\nBoth instruments are non-contact, which means they are ideal for fragile or shiny surfaces where stylus contact might cause damage or distortion. In this experiment, you will use both instruments to measure a test component and compare the results with its design dimensions.",
+        "objectives": [
+            "Understand the optical principles of the Profile Projector and Tool Maker's Microscope",
+            "Set up the Profile Projector and produce a magnified projection drawing on tracing paper",
+            "Measure component dimensions using the Tool Maker's Microscope micrometer table",
+            "Calculate the deviation between actual measured dimensions and the nominal controlled dimensions"
+        ],
+        "theory": {
+            "Profile Projector Optics": "Light from source A passes through a collimating lens B, producing parallel rays. These rays pass through the component (C) and are focused by projection lens D onto the screen F, forming an inverted, magnified real image. Magnification is selected by changing the projection lens.",
+            "Tool Maker's Microscope Construction": "A heavy base houses the lighting unit. A precision glass table (25 mm range, 1 µm accuracy) slides on bearing surfaces in two perpendicular directions controlled by calibrated micrometer drums. The microscope column rotates about a vertical axis and can be clamped at any angle.",
+            "Non-contact Measurement": "Because no physical stylus touches the workpiece, optical methods are ideal for soft materials, thin sections, and reflective surfaces. There is no risk of surface damage or measurement force errors.",
+            "Error Calculation": "Error = Actual Dimension (measured) − Controlled Dimension (design nominal)"
+        },
+        "procedure": {
+            "Profile Projector": [
+                "Switch on the projector lamp and allow it to warm up for 2 minutes.",
+                "Place the workpiece centrally on the object stage — ensure it blocks the light path squarely.",
+                "Select the most appropriate magnification (10×, 20×, or 50×) for a clear, well-defined image on the screen.",
+                "Place tracing paper on the frosted screen and secure it lightly.",
+                "Trace the projected profile accurately with a sharp pencil.",
+                "Using a ruler and protractor on the tracing, measure all critical dimensions visible in the projection.",
+                "Note the upper and lower tolerance limits from the component drawing.",
+                "Identify and measure any deviations from the nominal profile."
+            ],
+            "Tool Maker's Microscope": [
+                "Place the workpiece on the flat glass table, or mount between V-blocks for cylindrical components.",
+                "Move the microscope column up or down until the workpiece feature comes into sharp focus under the eyepiece.",
+                "Zero both micrometer drum readings at the first reference feature (e.g., left edge of a slot).",
+                "Move the table in the required direction using the micrometer drum until the crosshair aligns with the second feature.",
+                "Read the displacement from the micrometer drum — this is the measured dimension.",
+                "Record all feature measurements in the observation table.",
+                "Calculate: Error = Actual − Controlled for each feature."
+            ]
+        },
+        "key_points": [
+            "Both instruments are non-contact — ideal for fragile, thin, or polished components.",
+            "The Profile Projector reveals the complete outline geometry simultaneously.",
+            "Tool Maker's Microscope provides high-precision point-to-point measurement (1 µm resolution).",
+            "Select magnification carefully — too high a magnification may give a blurry image if the light is insufficient.",
+            "Always adjust for sharp focus before taking any measurements.",
+            "Tolerance bands on the tracing paper immediately highlight out-of-spec regions."
+        ],
+        "formulas": [
+            "Error = Actual Measured Dimension − Controlled (Nominal) Dimension",
+            "Magnification = Image Size on Screen / Actual Object Size"
+        ],
+        "images": [
+            "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&q=80",
+            "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80"
+        ],
+        "audio_loc": "audio/MQC-04.mp3",
+        "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-04"
+    },
+    "MQC-05": {
+        "lab_id": "MQC",
+        "apparatus": "Surface Roughness Measurement — Optical Flat & Stylus Tester",
+        "short_desc": "Analyse surface texture using light interference fringe patterns and a diamond-stylus roughness tester.",
+        "narration_script": "Welcome to Experiment 5 — Surface Roughness Measurement.\n\nEvery machined surface, no matter how smooth it appears to the naked eye, has microscopic peaks and valleys — the fingerprint of the manufacturing process that created it. The pattern and height of these irregularities, collectively called surface roughness or surface texture, profoundly influence how a component performs in service. Rough surfaces wear faster, generate more friction and heat, trap corrosion, and fail under fatigue loading sooner than smooth surfaces.\n\nThis experiment introduces you to two complementary methods of surface texture analysis.\n\nPart A uses the Optical Flat — a precisely flat, glass disc with a flatness tolerance measured in fractions of a wavelength of light. When placed on a polished workpiece surface, it creates a microscopic air wedge. Monochromatic sodium vapour light illuminating this air wedge produces interference fringes — alternating bright and dark bands. Perfectly straight and evenly-spaced fringes indicate a flat surface. Curved or irregularly-spaced fringes reveal surface undulations. This method is qualitative but extremely sensitive.\n\nPart B uses the Electronic Stylus Tester — a finely pointed diamond stylus that is drawn across the surface at a constant speed. The stylus rides over the peaks and dips into the valleys. Its vertical motion is amplified electronically and processed to give numerical roughness parameters. The most common parameter is Ra, the Centre Line Average — the arithmetic mean of all surface deviations from a reference line over the measurement length.",
+        "objectives": [
+            "Study the principle and construction of an Optical Flat",
+            "Observe and interpret interference fringe patterns to assess surface flatness",
+            "Measure surface roughness (Ra) using the electronic stylus instrument",
+            "Calculate CLA and RMS values from a roughness trace and understand their significance"
+        ],
+        "theory": {
+            "Optical Interference (Part A)": "When monochromatic light hits the air wedge between the flat and the workpiece, some rays reflect from the flat's bottom surface and some from the workpiece's top surface. If the path difference is an even multiple of half-wavelength, the waves are in phase → bright band. Odd multiple → out of phase → dark band. Curved fringes indicate surface irregularities.",
+            "Optical Flat Grades": "Grade I (Reference): Flatness tolerance 0.05 µm. Grade II (Working): 0.10 µm. Type A has one flat working surface; Type B has both surfaces flat and parallel.",
+            "CLA (Centre Line Average)": "Ra = ΣA / L — the arithmetic mean of all deviations from the mean line, measured without regard to sign. Preferred in production due to ease of measurement with electrical instruments.",
+            "RMS (Root Mean Square)": "Rq = √(Σy² / n) — more sensitive to peaks than CLA, used in precision optics and electronics. For a sinusoidal profile: Rq ≈ 1.11 × Ra.",
+            "Surface Texture Influences": "Surface roughness affects: corrosion resistance, wear resistance, fatigue life, lubrication retention, pressure sealing ability, noise in gear contact, and load-carrying capacity."
+        },
+        "procedure": {
+            "Part A — Optical Flat": [
+                "Clean both the optical flat and the workpiece surface thoroughly with lint-free cloth — dust causes false fringes.",
+                "Gently lay the optical flat on the workpiece surface — do not slide it.",
+                "Position the sodium vapour lamp above the optical flat.",
+                "Observe the interference fringe pattern through the flat from directly above.",
+                "Record whether fringes are straight, curved, or irregular.",
+                "Perform the fingertip test: lightly press one edge of the flat — if abutting fringes move toward the finger, the surface is convex; if they move away, it is concave.",
+                "Count the number of fringes and their spacing to qualitatively assess flatness."
+            ],
+            "Part B — Stylus Roughness Tester": [
+                "Place the workpiece firmly on the measurement table of the stylus tester.",
+                "Lower the stylus gently onto the workpiece surface at the measurement location.",
+                "Select the appropriate cut-off length (λc) and measurement length as per ISO standards.",
+                "Activate the drive motor to traverse the stylus across the surface at constant speed.",
+                "Wait for the instrument to complete the traverse and display the Ra value.",
+                "Record the Ra reading from the digital display.",
+                "Repeat at 3 or more different positions on the surface and compute the average Ra.",
+                "If a chart recorder is attached, analyse the trace to manually calculate CLA and RMS values."
+            ]
+        },
+        "key_points": [
+            "Cleanliness is critical for optical flat measurements — even a fingerprint falsifies the fringe pattern.",
+            "Monochromatic light (sodium vapour: 589 nm) is essential for sharp, countable fringes.",
+            "Grade I optical flats are for calibration reference only; Grade II are for working measurements.",
+            "CLA (Ra) is the industry-preferred surface roughness parameter for most applications.",
+            "RMS (Rq) is more sensitive to peaks and is used where extreme surface peaks are critical.",
+            "Multiple measurement locations are mandatory — surface roughness varies across a part.",
+            "The diamond stylus radius must be calibrated; a worn stylus overestimates valley depth."
+        ],
+        "formulas": [
+            "Ra (CLA) = ΣA / L  (sum of area deviations divided by measurement length)",
+            "Rq (RMS) = √(Σy² / n)  (square root of mean squared ordinates)",
+            "For sinusoidal profiles: Rq ≈ 1.11 × Ra"
+        ],
+        "images": [
+            "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
+            "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=600&q=80"
+        ],
+        "audio_loc": "audio/MQC-05.mp3",
+        "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-05"
+    },
+    "MQC-07": {
+        "lab_id": "MQC",
+        "apparatus": "Gear Tooth Vernier & Sine Bar — Gear and Angular Measurement",
+        "short_desc": "Measure gear tooth thickness at the pitch circle and determine unknown angles using a precision sine bar.",
+        "narration_script": "Welcome to Experiment 7 — Gear and Angular Measurement using the Gear Tooth Vernier and Sine Bar.\n\nGears are among the most important power-transmitting elements in mechanical systems. For gears to mesh correctly — transmitting power smoothly and without noise — each tooth must have the correct thickness at the pitch circle, and the pitch circle diameter must match the theoretical value. Errors in these dimensions cause incorrect backlash, noise, vibration, premature wear, and in worst cases, tooth breakage.\n\nIn the first part of this experiment, we use a Gear Tooth Vernier Calliper — a specially designed instrument with two independent measuring systems: horizontal jaws that measure tooth thickness, and a vertical tongue that sets the depth on the tooth face to ensure measurement is taken exactly at the pitch circle, not above or below it.\n\nIn the second part, we study angular measurement with the Sine Bar — a beautifully simple yet powerful precision tool. A sine bar is a hardened steel bar with two precision ground cylinders at each end, exactly 100 mm or 200 mm apart. By raising one roller on a stack of slip gauges, the bar tilts to a precise angle. Since we know the sine bar length (the hypotenuse) and we control the height (the opposite side), the angle is determined simply from trigonometry: sin(angle) = height / length. This method achieves angular accuracy of a few arc-seconds — far better than any graduated protractor.",
+        "objectives": [
+            "Measure gear tooth thickness at the pitch circle using the Gear Tooth Vernier Calliper",
+            "Calculate theoretical chordal tooth thickness and compare with measured values",
+            "Understand the construction and working principle of a sine bar",
+            "Measure an unknown angle on a workpiece using a sine bar, slip gauges, and a dial indicator",
+            "Set up a workpiece at a specified angle using the sine bar angle-setting procedure"
+        ],
+        "theory": {
+            "Gear Terminology": "Module (m) = PCD / T. Pitch Circle Diameter (PCD) = m × T. Pressure Angle: standard 20°. Tooth Thickness at pitch circle determines correct meshing. Chordal Thickness (W) = m × T × sin(90°/T). Chordal Height (H) = (mT/2)[1 − cos(90°/T)] + m.",
+            "Gear Inspection Parameters": "Key checks: runout (using pin or rolling test), pitch index, involute profile, lead, backlash (dial indicator against a master gear), composite error (double-flank rolling test), and tooth thickness (Vernier or constant chord method).",
+            "Sine Bar Principle": "The sine bar forms the hypotenuse of a right-angled triangle. sin(θ) = h / L where h = height of slip gauge stack under one roller and L = centre distance between rollers (100 mm or 200 mm). The angle θ = sin⁻¹(h/L).",
+            "Sine Bar Accuracy": "Accuracy depends on: precision of slip gauges, flatness of surface plate, accuracy of roller centre distance, and the quality of the indicator. Errors increase as angles exceed 45° — a 200 mm sine bar is preferred for larger angles to keep h manageable."
+        },
+        "procedure": {
+            "Gear Tooth Thickness": [
+                "Set the vertical tongue of the Gear Tooth Vernier to the chordal height H = (mT/2)[1 − cos(90°/T)] + m, using the vertical scale of the instrument.",
+                "Place the instrument on a gear tooth with the tongue resting on the tooth tip, controlling the depth of measurement.",
+                "Close the horizontal jaws until they contact the tooth flanks at the pitch circle level.",
+                "Record the reading on the horizontal scale — this is the chordal tooth thickness W (actual).",
+                "Repeat the measurement on 5 different teeth distributed around the gear.",
+                "Calculate the average and compare with theoretical W = m × T × sin(90°/T).",
+                "The difference between actual and theoretical thickness reveals tooth errors."
+            ],
+            "Sine Bar — Measuring Unknown Angle": [
+                "Determine the approximate workpiece angle using a bevel protractor.",
+                "Based on this estimate, calculate the required slip gauge height: h = L × sin(estimated angle).",
+                "Place the slip gauge stack under one roller of the sine bar and set it on the surface plate.",
+                "Mount the workpiece on the inclined sine bar and clamp it securely.",
+                "Mount the dial gauge on a surface gauge stand and traverse it along the workpiece surface.",
+                "Note any variation in the dial reading as the indicator moves — this indicates an angular error.",
+                "Calculate the angular correction: δθ = arctan(variation / traverse length).",
+                "Adjust the slip gauge height until the dial reads constant across the full length."
+            ],
+            "Sine Bar — Setting Job at a Given Angle": [
+                "From the required angle θ and sine bar length L, calculate: h = L × sin(θ).",
+                "Build a slip gauge stack equal to h (select individual slip gauges to minimise the number of wrings).",
+                "Place the stack under one roller of the sine bar on a flat surface plate.",
+                "Mount the workpiece on the inclined sine bar surface and clamp it.",
+                "Verify with a dial gauge that the workpiece surface is parallel to the sine bar working surface."
+            ]
+        },
+        "key_points": [
+            "The vertical tongue of the Gear Tooth Vernier controls measurement depth — set it to the correct chordal height before measuring.",
+            "Measure at least 5 teeth and average the results to account for pitch errors and runout.",
+            "The Sine Bar is most accurate for angles below 45° on a 100 mm bar — use a 200 mm bar for larger angles.",
+            "Slip gauges must be Grade 0 for accurate angle setting — wring them carefully to avoid measurement errors.",
+            "The surface plate provides the absolute flat reference — keep it clean and protected.",
+            "Angular error from the dial indicator: δθ = arctan(reading variation / traverse length)."
+        ],
+        "formulas": [
+            "Module: m = PCD / T",
+            "PCD = m × T",
+            "Chordal Thickness: W = m × T × sin(90°/T)",
+            "Chordal Height: H = (mT/2)[1 − cos(90°/T)] + m",
+            "Sine Bar Angle: θ = sin⁻¹(h / L)",
+            "Sine Bar Height: h = L × sin(θ)",
+            "Angular Error: δθ = arctan(dial variation / traverse distance)"
+        ],
+        "images": [
+            "https://images.unsplash.com/photo-1565098772267-60af42b81ef2?w=600&q=80",
+            "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80"
+        ],
+        "audio_loc": "audio/MQC-07.mp3",
+        "qr_addr": "https://pillowy-lottie-lampless.ngrok-free.dev/?exp=MQC-07"
+    }
 }

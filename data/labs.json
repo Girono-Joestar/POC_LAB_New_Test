@@ -1,0 +1,9 @@
+{
+    "MQC": {
+        "name": "Metrology & Quality Control Lab",
+        "description": "MES College of Engineering, Pune — Mechanical Engineering Dept.",
+        "api_key_override": "",
+        "use_universal_key": true,
+        "exp_ids": ["MQC-01", "MQC-02", "MQC-03", "MQC-04", "MQC-05", "MQC-07"]
+    }
+}
