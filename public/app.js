@@ -45,6 +45,14 @@ const $chatInput= document.getElementById('chat-input');
 const $sendBtn  = document.getElementById('send-btn');
 const $greeting = document.getElementById('chat-greeting');
 
+// Hero Carousel DOM
+const $heroCarouselSection = document.getElementById('hero-carousel-section');
+const $heroTrack = document.getElementById('hero-carousel-track');
+const $heroDots  = document.getElementById('hero-carousel-dots');
+const $heroPrev  = document.getElementById('hero-carousel-prev');
+const $heroNext  = document.getElementById('hero-carousel-next');
+
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Network helper
 // ─────────────────────────────────────────────────────────────────────────────
@@ -109,6 +117,7 @@ async function showDetails(id) {
 
     $list.classList.add('hidden');
     $hero.classList.add('hidden');
+    $heroCarouselSection.classList.add('hidden');
     $details.classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -164,6 +173,7 @@ function goBackToList() {
     $details.classList.add('hidden');
     $list.classList.remove('hidden');
     $hero.classList.remove('hidden');
+    $heroCarouselSection.classList.remove('hidden');
     $audio.pause();
     currentExpId = null;
     chatHistory = [];
@@ -272,36 +282,106 @@ function populateKeyPoints(exp) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Carousel
+// Carousel System
 // ─────────────────────────────────────────────────────────────────────────────
+class Carousel {
+    constructor(track, dots, prevBtn, nextBtn) {
+        this.track = track;
+        this.dots = dots;
+        this.prevBtn = prevBtn;
+        this.nextBtn = nextBtn;
+        this.images = [];
+        this.index = 0;
+
+        if (this.prevBtn) this.prevBtn.onclick = () => this.prev();
+        if (this.nextBtn) this.nextBtn.onclick = () => this.next();
+    }
+
+    init(images) {
+        this.images = images;
+        this.index = 0;
+        this.build();
+    }
+
+    build() {
+        if (!this.track) return;
+        this.track.innerHTML = '';
+        if (this.dots) this.dots.innerHTML = '';
+
+        this.images.forEach((src, i) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `Carousel image ${i + 1}`;
+            img.onerror = () => { img.src = `https://placehold.co/800x600/455a64/ffffff?text=Image+Unavailable`; };
+            this.track.appendChild(img);
+
+            if (this.dots) {
+                const dot = document.createElement('button');
+                dot.className = 'carousel__dot' + (i === 0 ? ' active' : '');
+                dot.ariaLabel = `Slide ${i + 1}`;
+                dot.onclick = () => this.goTo(i);
+                this.dots.appendChild(dot);
+            }
+        });
+
+        const hasMultiple = this.images.length > 1;
+        if (this.prevBtn) this.prevBtn.classList.toggle('hidden', !hasMultiple);
+        if (this.nextBtn) this.nextBtn.classList.toggle('hidden', !hasMultiple);
+        
+        this.update();
+    }
+
+    goTo(i) {
+        this.index = i;
+        this.update();
+    }
+
+    prev() {
+        this.index = (this.index - 1 + this.images.length) % this.images.length;
+        this.update();
+    }
+
+    next() {
+        this.index = (this.index + 1) % this.images.length;
+        this.update();
+    }
+
+    update() {
+        if (this.track) {
+            this.track.style.transform = `translateX(-${this.index * 100}%)`;
+        }
+        if (this.dots) {
+            this.dots.querySelectorAll('.carousel__dot').forEach((d, i) => 
+                d.classList.toggle('active', i === this.index)
+            );
+        }
+    }
+}
+
+// Instantiate carousels
+const detailCarousel = new Carousel($track, $dots, $prevBtn, $nextBtn);
+const heroCarousel = new Carousel($heroTrack, $heroDots, $heroPrev, $heroNext);
+
 function buildCarousel() {
-    $track.innerHTML = '';
-    $dots.innerHTML = '';
-    carouselImages.forEach((src, i) => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = `Experiment image ${i + 1}`;
-        img.onerror = () => { img.src = `https://placehold.co/600x400/455a64/ffffff?text=Image+Unavailable`; };
-        $track.appendChild(img);
-
-        const dot = document.createElement('button');
-        dot.className = 'carousel__dot' + (i === 0 ? ' active' : '');
-        dot.ariaLabel = `Image ${i + 1}`;
-        dot.onclick = () => goToSlide(i);
-        $dots.appendChild(dot);
-    });
-    $prevBtn.classList.toggle('hidden', carouselImages.length <= 1);
-    $nextBtn.classList.toggle('hidden', carouselImages.length <= 1);
-    updateCarousel();
+    detailCarousel.init(carouselImages);
 }
 
-function goToSlide(i) { carouselIndex = i; updateCarousel(); }
-function updateCarousel() {
-    $track.style.transform = `translateX(-${carouselIndex * 100}%)`;
-    $dots.querySelectorAll('.carousel__dot').forEach((d, i) => d.classList.toggle('active', i === carouselIndex));
+function initHeroCarousel() {
+    const heroImages = [
+        'images/IMG_1.jpeg',
+        'images/IMG_2.jpeg',
+        'images/IMG_3.jpeg',
+        'images/IMG_4.jpeg'
+    ];
+    heroCarousel.init(heroImages);
+    
+    // Auto-advance hero carousel every 5 seconds
+    setInterval(() => {
+        if (!$heroCarouselSection.classList.contains('hidden')) {
+            heroCarousel.next();
+        }
+    }, 5000);
 }
-$prevBtn.onclick = () => { carouselIndex = (carouselIndex - 1 + carouselImages.length) % carouselImages.length; updateCarousel(); };
-$nextBtn.onclick = () => { carouselIndex = (carouselIndex + 1) % carouselImages.length; updateCarousel(); };
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Chat — with history
@@ -381,4 +461,5 @@ window.onunhandledrejection = e => log.error('Unhandled rejection:', e.reason);
 // ─────────────────────────────────────────────────────────────────────────────
 // Init
 // ─────────────────────────────────────────────────────────────────────────────
+initHeroCarousel();
 fetchExperiments().then(checkQueryParams).catch(e => log.error('Init failed:', e));
