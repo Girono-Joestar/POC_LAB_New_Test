@@ -52,11 +52,14 @@ flowchart TD
     C --> D["📡 GET /api/experiments/{id}<br/>log: 'Fetching experiment detail'"]
 
     B -- No --> E["📡 GET /api/experiments<br/>log: 'Fetching experiment list'"]
-    E --> F{"API responds OK?"}
+    E --> EE["🎨 Render Hero Carousel<br/>(auto-advancing)"]
+    EE --> F{"API responds OK?"}
     F -- No --> G["❌ Show error message<br/>log: 'Failed to load experiments'"]
+    G --> G1["Hide Hero Carousel"]
     F -- Yes --> H["🎨 Render experiment cards<br/>log: 'Rendering N experiment cards'"]
     H --> I["👆 User clicks a card<br/>log: 'Card clicked: BKR-XX'"]
-    I --> D
+    I --> II["🙈 Hide Hero Carousel<br/>(detail view focus)"]
+    II --> D
 
     D --> J{"API responds OK?"}
     J -- No --> K["❌ Show error<br/>log: 'Failed to load detail'"]
@@ -221,8 +224,9 @@ Use this to understand what to check when you modify a file:
 | `data/settings.json` | Gemini API key used for chat | Test chat — send a question |
 | `api/main.py` | All API endpoints | Run `uvicorn`, hit each endpoint |
 | `public/index.html` | Page structure, layout | Visual check in browser |
-| `public/style.css` | All visual styling | Visual check — cards, chat, carousel |
-| `public/app.js` | All frontend behavior | Click cards, use carousel, chat |
+| `public/style.css` | All visual styling | Visual check — cards, chat, carousels (hero & detail) |
+| `public/app.js` | All frontend behavior | Click cards, use carousels (hero class), chat |
+| `public/images/` | Hero carousel assets | Verify image links in app.js initHeroCarousel() |
 | `public/admin_5502.html` | Admin portal only | Go to `/secret-admin-portal`, login, edit, save |
 | `vercel.json` | Routing, deployment | Deploy to Vercel, check all routes |
 | `.env` | API keys, admin token | Restart server, test auth and chat |

@@ -18,7 +18,8 @@
 
 POC AI Lab is an interactive web application for a university metrology and instrumentation laboratory. Students scan QR codes placed next to lab equipment and are taken to a page with:
 
-- **Images** of the apparatus (carousel)
+- **Hero Carousel** on the main page showcasing the lab and equipment
+- **Images** of the apparatus (carousel) in the detail view
 - **Audio narration** describing the experiment
 - **AI chatbot** (Google Gemini) that answers questions in context
 
@@ -82,8 +83,9 @@ POC_AI_LAB/
 ├── public/                   # Served as static assets by Vercel
 │   ├── index.html            # Main public page
 │   ├── style.css             # Material 3 Expressive design system
-│   ├── app.js                # Frontend logic (experiments, carousel, chat)
+│   ├── app.js                # Frontend logic (refactored Carousel system, chat, etc.)
 │   ├── admin_5502.html       # Hidden admin portal
+│   ├── images/               # Hero carousel images (IMG_1.jpeg, etc.)
 │   └── audio/                # Audio files served to browser
 │       └── BKR-*.mp3
 ├── prototype_backup/         # Old Streamlit code (archived, not deployed)
@@ -166,7 +168,9 @@ The CSS follows **Material 3 Expressive** guidelines:
 **Components implemented:**
 - Top App Bar (sticky)
 - Hero section with animated gradient blob
+- **Hero Carousel** (auto-advancing, main page)
 - Experiment cards with staggered fade-in
+- **Generic Carousel System** (reusable class for hero and details)
 - Image carousel with prev/next buttons and dot indicators
 - Chat window with typing indicator
 - FAB (Floating Action Button)

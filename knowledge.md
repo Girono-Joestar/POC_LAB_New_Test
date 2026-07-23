@@ -31,6 +31,12 @@ The Metrology and Quality Control Lab at MES College of Engineering, Pune, focus
 - **Retrieval:** FAISS vector store with MMR (Maximal Marginal Relevance) to prevent repetitive AI responses.
 - **Context:** Agent has access to `Procedure.md`, DOCX lab manuals, and structured experiment JSON data.
 
+### Frontend Architecture
+- **File:** `public/app.js`, `public/style.css`
+- **Design:** Material 3 Expressive System.
+- **Carousel System:** Refactored into a reusable `Carousel` class for both the Hero (main page) and detail views. Supports auto-advancing (every 5 seconds) and dot indicators.
+- **View Controller:** Manages state between the experiment grid and detail view using `.hidden` class toggles.
+
 ### Admin Panel
 - **File:** `public/admin_5502.html`
 - **Features:** 
