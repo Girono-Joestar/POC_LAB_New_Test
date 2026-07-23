@@ -22,7 +22,7 @@ logger = logging.getLogger("poc_ai_lab.agent")
 _agents: Dict[str, object] = {}
 
 
-def _make_llm(api_key: str, model: str = "deepseek-ai/deepseek-v4-pro"):
+def _make_llm(api_key: str, model: str = "meta/llama-3.3-70b-instruct"):
     """Create the underlying LLM using NVIDIA NIM."""
     from langchain_nvidia_ai_endpoints import ChatNVIDIA
     from api.rate_limiter import llm_limiter
